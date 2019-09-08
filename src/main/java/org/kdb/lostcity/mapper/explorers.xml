@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="explorers">
+
+	<insert id="insertUser" parameterType="Explorer"><!-- join -->
+		insert into explorers(email, password, nickname, profile)
+		values( #{email}, #{password}, #{nickname}, #{profile} )	
+	</insert>
+	
+	<select id="selectList" resultType="Explorer">
+		SELECT email, password, nickname, profile, check_email checkEmail, keep_login keepLogin, score, check_email_time checkEmailTime
+		FROM explorers
+	</select>
+	<select id="selectLogin" parameterType="Explorer" resultType="Explorer">
+		SELECT email, password, nickname, profile, check_email checkEmail, keep_login keepLogin, score, check_email_time checkEmailTime
+		FROM explorers
+		WHERE email = #{email} AND password = #{password}
+	</select>  
+	<select id="selectId" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM explorers
+		WHERE email=#{email}
+	</select>
+	
+	<select id="selectNickname" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM explorers
+		WHERE nickname=#{nickname}
+	</select>
+	 
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

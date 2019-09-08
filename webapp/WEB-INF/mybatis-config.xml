@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+"-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="org.kdb.lostcity.vo.Explorer" alias="Explorer"/>
+		<typeAlias type="org.kdb.lostcity.vo.Post" alias="Post"/>
+		<typeAlias type="org.kdb.lostcity.vo.Like" alias="Like"/>
+		<typeAlias type="org.kdb.lostcity.vo.Comment" alias="Comment"/>
+		<typeAlias type="org.kdb.lostcity.vo.View" alias="View"/>
+		<typeAlias type="org.kdb.lostcity.vo.PageVO" alias="PageVO"/>
+		<typeAlias type="org.kdb.lostcity.vo.Report" alias="Report"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="org/kdb/lostcity/mapper/posts.xml" />
+		<mapper resource="org/kdb/lostcity/mapper/likes.xml" />
+		<mapper resource="org/kdb/lostcity/mapper/views.xml" />
+		<mapper resource="org/kdb/lostcity/mapper/comments.xml" />
+		<mapper resource="org/kdb/lostcity/mapper/reports.xml" />
+		<mapper resource="org/kdb/lostcity/mapper/explorers.xml" />
+	</mappers>
+
+</configuration>
+
+
+
+
+
