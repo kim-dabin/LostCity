@@ -6,15 +6,15 @@
 	<div id="gnb" >
 		<h2 class="screen_out"> 주요 서비스 </h2>
 		<ul>
-			<li class="nav"> <a class="waitingRoom" href="waiting.html">대기실</a> </li>
-			<li class="nav"> <a  class="ranking" href="ranking.html" >랭 킹</a> </li>
+			<li class="nav ${param.type=='w'?'on':''}"> <a class="waitingRoom" href="waiting.html">대기실</a> </li>
+			<li class="nav ${param.type=='r'?'on':''}"> <a  class="ranking" href="/ranking" >랭 킹</a> </li>
 			<li class="nav ${param.type=='c'?'on':''}"> <a class="community" href="/community" >커뮤니티</a> </li>
 		</ul>
 	</div><!--//#gnb -->
 </div><!--//aux -->
 <div id="loginBox">
 	<h2 class="screen_out">유저정보</h2>
-	<img src="/profile/profile.png"
+	<img src="${logUser.profile }"
 	class="profile_on"  width="60" height="60"
 	alt="테스터"
 	title="테스터"/>
@@ -26,8 +26,13 @@
 	</div><!--//#profilePopup -->
 </div><!--// loginBox  -->
 <script>
+
+
 const $profile = $("#loginBox img");
 const $profileTarget = $("#profilePopup");
+//한국시간으로 변경 
+moment.locale("ko"); 
+
 
 $profile.click(function () {
 	$profileTarget.toggle();

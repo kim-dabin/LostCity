@@ -157,12 +157,16 @@ public class Post  implements Serializable {
 		
 		if(categoryType.equals("F")) {
 			categoryName = "자유";
+			this.categoryType = "free";
 		}else if(categoryType.equals("P")) {
 			categoryName = "건의/오류";
+			this.categoryType = "suggestion";
 		}else if(categoryType.equals("T")) {
 			categoryName = "전략/팁";
+			this.categoryType = "tip";
 		}else if(categoryType.equals("N"))  {
 			categoryName = "공지";
+			this.categoryType = "notice";
 		}
 	}
 	

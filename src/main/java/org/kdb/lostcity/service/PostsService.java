@@ -9,6 +9,8 @@ import org.kdb.lostcity.vo.Post;
 public interface PostsService {
 	
 	public Map<String, Object> getPosts(int page, String categoryType, String sortingType, String text, String searchOpt);
-	
-	public Post getPost(int no);
+	public Map<String, Object> getPost(int no, String categoryType);
+	public boolean delete(int no);
+	public Map<String, Post> getOrderPosts(Post info);
+	 
 }

@@ -20,6 +20,7 @@ public class PageVO {
 		this.no = no;
 	}
 	
+	
 	public int getNo() {
 		return no;
 	}

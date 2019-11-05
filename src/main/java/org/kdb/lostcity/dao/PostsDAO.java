@@ -10,5 +10,7 @@ public interface PostsDAO {
 	public List<Post> selectList(Map<String,Object> map);
 	public int selectTotal(Map<String,Object> map);
 	public Post selectOne(int no);
+	public int delete(int no);
+	public List<Post> selectOrder(Map<String,Object> post);
 	
 }

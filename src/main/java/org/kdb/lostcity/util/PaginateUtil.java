@@ -75,6 +75,8 @@ public class PaginateUtil {
 
 		return paginate;
 	}
+	
+
 
 	public String getPaginate(int pageNo, int total, int numPage, int numBlock, String url) {
 //현재 페이지 : pageNo

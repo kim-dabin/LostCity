@@ -3,9 +3,42 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comments">
-
+	<delete id="deleteALL" parameterType="int">
+		delete from comments where post_no=#{postNo}
+	</delete>
+	<insert id="insert" parameterType="Comment" useGeneratedKeys="true" keyProperty="no">
+		insert into comments(explorer_no, post_no, content)
+		values(#{explorerNo}, #{postNo}, #{content})
+	</insert>
+	<select id="selectList" parameterType="PageVO" resultType="Comment">
+	select  TB2.*
+	from(select TB1.*, row_number() over(ORDER BY no DESC) as r 
+	from(select c.no no, c.explorer_no explorerNo, c.post_no postNo, c.content content, e.nickname nickname, e.profile profile, c.regdate regdate
+		from comments c
+		left join explorers e
+		on c.explorer_no = e.no
+		where c.post_no=#{no} 
+		)as TB1 
+		order by TB1.no desc 
+		)as TB2
+	where TB2.r between #{start} and #{end}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from comments where no=#{no}
+	</delete>
+	<select id="selectAmount" parameterType="int" resultType="int">
+	select count(no)
+	from comments
+	where post_no=#{postNo}
 	
-	
+	</select>
+	<select id="selectOne" parameterType="int" resultType="Comment">
+		select c.no no, c.explorer_no explorerNo, c.post_no postNo, c.content content, e.nickname nickname, e.profile profile, c.regdate regdate
+		from comments c
+		left join explorers e
+		on c.explorer_no = e.no
+		where c.no=#{no}
+	</select>
 
 </mapper>
 

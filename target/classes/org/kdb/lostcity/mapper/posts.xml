@@ -4,6 +4,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="posts">
 
+<delete id="delete" parameterType="int">
+	DELETE FROM posts where no=#{no}
+</delete>
+
+<select id="selectOrder" resultType="Post" parameterType="map">
+SELECT no, explorer_no explorerNo, title, content
+FROM posts
+WHERE no in ((select no from posts where 
+<choose>
+<when test="categoryType.equals('ALL') ">
+category_type IN('N','F','T','P')
+</when>
+<otherwise>
+category_type = #{categoryType}
+</otherwise>
+</choose> 
+AND
+no <![CDATA[ < ]]> #{no}
+
+order by no DESC limit 1),
+(select no from posts where 
+<choose>
+<when test="categoryType.equals('ALL') ">
+category_type IN('N','F','T','P')
+</when>
+<otherwise>
+category_type = #{categoryType}
+</otherwise>
+</choose> 
+AND
+no <![CDATA[ > ]]> #{no} 
+order by no limit 1)) 
+</select>
+
+
+
 <select id="selectOne" resultType="Post" parameterType="int">
 SELECT p.no no, p.explorer_no explorerNo, p.title title, p.content content, p.category_type categoryType, p.regdate regdate, e.email email, e.nickname nickname, e.profile profile, e.score score,
 
@@ -17,21 +53,32 @@ WHERE p.no = #{no}
 
 </select>
 
-	<select id="selectList" resultType="Post" parameterType="map">		
-SELECT no, explorerNo, title, content, categoryType, regdate, email, nickname, profile, score, r,countLikes, countComments,countViews 
+<select id="selectList" resultType="Post" parameterType="map">		
+
+SELECT TB3.*
+
+from(
+SELECT TB2.*, row_number() over(ORDER BY 
+<choose>
+<when test="sortingType.equals('popularity')">
+TB2.counts DESC
+</when>
+<otherwise>
+TB2.no DESC
+</otherwise>
+</choose>) as r 
 
 FROM(
 
-SELECT no, explorerNo, title, content, categoryType, regdate, email, nickname, profile, score, r,countLikes, countComments,countViews, SUM(countLikes+countComments+countViews) as counts
+SELECT TB1.* , SUM(TB1.countLikes+TB1.countComments+TB1.countViews) as counts
 FROM(
 SELECT p.no no, p.explorer_no explorerNo, p.title title, p.content content, p.category_type categoryType, p.regdate regdate, e.email email, e.nickname nickname, e.profile profile, e.score score,
 
 (SELECT COUNT(l.no) FROM likes l WHERE p.no = l.content_no AND l.content_type='P') as countLikes, 
 (SELECT count(c.no) FROM comments c WHERE p.no = c.post_no ) as countComments, 
-(SELECT count(*) FROM views v WHERE p.no = v.post_no ) as countViews,
+(SELECT count(*) FROM views v WHERE p.no = v.post_no ) as countViews
 
-row_number() over() as r
-FROM posts p 
+FROM posts p
 left join explorers e
 on p.explorer_no = e.no
 
@@ -68,25 +115,14 @@ p.category_type = #{categoryType}
 
 group by TB1.no 
 
-order by
+) as TB2 )as TB3
 
-<choose>
-<when test="sortingType.equals('popularity')">
-counts DESC
-</when>
-<otherwise>
-TB1.no  DESC
-</otherwise>
-</choose>
-
-) as TB2 
-
-WHERE TB2.r BETWEEN #{start} AND #{end}
+WHERE TB3.r BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="selectTotal" resultType="int" parameterType="map">
 		SELECT count(*)
-		FROM posts p 
+		FROM posts p
 left join explorers e
 on p.explorer_no = e.no
 		WHERE 

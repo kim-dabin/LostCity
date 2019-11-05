@@ -558,3 +558,80 @@ button::-moz-focus-inner {
 	font-size:16px;
 	margin-top:3px;
 }
+.category.tip{
+			background-color: #9575CD;
+		}
+	.category.free{
+			background-color: #FFD54F;
+		}
+	.category.suggestion{
+			background-color: #64B5F6;
+		}
+		.category.notice{
+			background-color: #424242;
+		}
+.thumb_user::before {
+	content: "";
+	width: 34px;
+	height: 34px;
+	border-radius: 18px;
+	background-image: url(../img/tier.png);
+	background-size: 319px 38px;
+	background-repeat: no-repeat;
+	position: absolute;
+	background-color: #222;
+	right: 0px;
+	top: 22px;
+	border: 1px solid #424242;
+	transition: .1s ease;
+}
+
+
+.thumb_user:hover::before{
+	content: attr(data-tier);
+	text-align: center;
+	font-size: 14px;
+	font-weight: 700;
+	color:#fff;
+	text-shadow: 1px 1px 1px #000;
+	opacity: .7;
+	
+	
+}
+.thumb_user.tier_1::before {
+	background-position: 1px 0px;
+	
+}
+
+.thumb_user.tier_2::before {
+	background-position: -35px 0px;
+	
+}
+
+.thumb_user.tier_3::before {
+	background-position: -69px 0px;
+}
+
+.thumb_user.tier_4::before {
+	background-position: -103px 0px;
+}
+
+.thumb_user.tier_5::before {
+	background-position: -136px 1px;
+}
+
+.thumb_user.tier_6::before {
+	background-position: -170.5px 0px;
+}
+
+.thumb_user.tier_7::before {
+	background-position: -204px 1px;
+}
+
+.thumb_user.tier_8::before {
+	background-position: -242.1px -1px;
+}
+
+.thumb_user.tier_9::before {
+	background-position: -282.8px -2px;
+}

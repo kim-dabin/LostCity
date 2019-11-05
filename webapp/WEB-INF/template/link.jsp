@@ -7,4 +7,8 @@
      <script src="/js/jquery.js"></script>
 <script src="/js/underscore-min.js"></script>
 <script src="/js/moment-with-locales.js"></script>
+<script src="/js/highcharts.js"></script>
+<script src="/js/dark-unica.js"></script>
+<script src="/js/histogram-bellcurve.js"></script>
+
     <link rel="icon" type="image/x-icon" href="/img/symbol_yellow.png"/>

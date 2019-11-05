@@ -13,8 +13,17 @@ import org.springframework.stereotype.Repository;
 public class PostsDAOImpl implements PostsDAO {
 	@Autowired
 private SqlSession session;
+	@Override
+	public List<Post> selectOrder(Map<String,Object>  post) {
+		// TODO Auto-generated method stub
+		return session.selectList("posts.selectOrder", post);
+	}
 	
-	
+	@Override
+	public int delete(int no) {
+		// TODO Auto-generated method stub
+		return session.delete("posts.delete", no);
+	}
 	@Override
 		public List<Post> selectList(Map<String, Object> map) {
 			// TODO Auto-generated method stub

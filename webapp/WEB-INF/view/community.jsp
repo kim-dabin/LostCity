@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,7 +23,7 @@
 				<ul>
 					<li>
 					
-					<input id="cateALL" class="hidden cate_tab" checked="checked" type="radio" form="searchForm" name="categoryType" value="ALL"/>
+					<input id="cateALL" class="hidden cate_tab" checked="checked" type="radio" form="searchForm" name="categoryType" <c:set var="checkedCategory" value=""></c:set> value="ALL"/>
 					<label class="item_tab"  for="cateALL">전체</label>
 					</li>
 					<li>
@@ -106,20 +108,19 @@
 			</form><!--//searchForm -->
 		</div><!--//searchBox -->
 	</div><!--//aux -->
+	
 </div><!--//content-->
 <c:import url="/WEB-INF/template/footer.jsp"/>
 	<script type="text/template" id="postsTmp">
 			
-		
-			
-		
-			<h2 class="screen_out">게시물 리스트</h2>	
+		<h2 class="screen_out">게시물 리스트</h2>	
 		<ul id="articleList">
+			<@ if(posts!=null&&posts.length>0){ @>
 			<@ _.each(posts,function(post){ @>
 			<@ if(post.categoryType == "N"){ @>
 
 			<li class="article notice">
-				<a href="/community/{post.no}">
+				<a href="/community/<@=post.no @>">
 					<span class="category notice">
 						공지 
 					</span>
@@ -130,9 +131,6 @@
 						<@=post.title @>
 					</h3>
 					</div><!--//.box_title -->
-					
-
-
 					<time><@=moment(post.regdate).fromNow() @></time>
 					
 				</a>
@@ -140,8 +138,11 @@
 		
 		 <@ } else{ @>
 		<li class="article">
-				<a href="/community/{post.no}">
-					<span class="category <@ if(post.categoryType=='F'){@> free <@ } else if(post.categoryType=='P'){@> prob <@} else{ @> tip <@} @> ">
+
+
+
+				<a class="article_href" href="/community/<@=post.no @>/type/<@=category @> ">
+					<span class="category <@=post.categoryType @> ">
 						<@=post.categoryName @>			
 					</span>
 
@@ -182,8 +183,16 @@
  		<@ } @>
 		
  <@ }) @>
+
 		</ul><!--//articleList -->
+<@ } else{ @> 
+	<div> 게시물이 없습니다 </div>
+
+<@ } @>
+
 <@=paginate @>
+
+
 	</script>
 <script>
 
@@ -224,7 +233,7 @@ const $resetSearchOpt = $("input:radio[name=searchOpt]:input[value='titleNconten
 let sortingType = $(".sort a.on").attr("data-sort");
 let page = 1; // page는 1페이지 부터 시작  
 
-
+const $hrefArticle = $(".article_href");
 
 
 
@@ -270,10 +279,36 @@ $searchBox.toggleClass("click");
 	$categoryTab.on("click",function(){
 		reset();
 		getPosts();
+		
+		
 	});//on end 
+	
+	/*
+	let check = "";
+	getCategoryType();
+	
 
-
-
+	 $categoryTab.on("change", function() {
+		//getCategoryType($(this));
+		$categoryTab.val($(this).val());
+	});
+	 
+	
+	 function getCategoryType() {
+		 check = $categoryTab.val();
+		 //$categoryTab.val(check);
+		return check;
+	} 
+	 */  
+	 
+	
+	 function checkedCate() {
+		let checkedCategory = $(".cate_tab:checked").val();
+		//$categoryTab.val(checkedCategoryData);
+		 //<c:set var="checkedCategory" value="${checkedCategoryData}" />
+		//console.log(checkedCategoryData);
+		return checkedCategory;
+	}
 
 //게시물 출력 
 getPosts();
@@ -285,8 +320,10 @@ getPosts();
 function getPosts() {
 	
 	let formData =  $searchForm.serialize();
-	console.log("form data");
-	console.log(formData);
+	//console.log("form data");
+	
+	
+	
 	$.ajax({ 
 		url:"/ajax/search",
 		type:"post",
@@ -297,7 +334,8 @@ function getPosts() {
 		success: function(json) {
 		
 			if(page==1 || json.posts.length>0){
-				let html = postsTmp({"posts": json.posts,"paginate": json.paginate});
+				console.log(json.posts);
+				let html = postsTmp({"posts": json.posts,"paginate": json.paginate, "category": checkedCate() });
 				$articleBox.empty().append(html);
 				$txtInp.val(""); 
 				
