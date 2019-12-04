@@ -12,5 +12,8 @@ public interface PostsService {
 	public Map<String, Object> getPost(int no, String categoryType);
 	public boolean delete(int no);
 	public Map<String, Post> getOrderPosts(Post info);
-	 
+	public int getPosting(Post post);
+	public List<Post> getPostsByExplorer(int explorerNo);
+	
+	
 }

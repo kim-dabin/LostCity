@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Post  implements Serializable {
-	private int no, explorerNo, countViews, countLikes, countComments;
-	private String title, content, categoryType, email, nickname, profile, categoryName,sortingType,text;
+	private int no, explorerNo, countViews, countLikes, countComments, rowNum, total;
+	private String title, content, categoryType,categoryTypeLabel, email, nickname, profile, categoryName,sortingType,text;
 	private double score;
 	private Timestamp regdate;
 
@@ -41,6 +41,20 @@ public class Post  implements Serializable {
 		this.categoryName = categoryName;
 		this.score = score;
 		this.regdate = regdate;
+	}
+	
+	public int getRowNum() {
+		return rowNum;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	
+	public int getTotal() {
+		return total;
+	}
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
 	}
 	
 	public String getSortingType() {
@@ -157,17 +171,21 @@ public class Post  implements Serializable {
 		
 		if(categoryType.equals("F")) {
 			categoryName = "자유";
-			this.categoryType = "free";
+			categoryTypeLabel = "free";
 		}else if(categoryType.equals("P")) {
 			categoryName = "건의/오류";
-			this.categoryType = "suggestion";
+			categoryTypeLabel = "suggestion";
 		}else if(categoryType.equals("T")) {
 			categoryName = "전략/팁";
-			this.categoryType = "tip";
+			categoryTypeLabel = "tip";
 		}else if(categoryType.equals("N"))  {
 			categoryName = "공지";
-			this.categoryType = "notice";
+			categoryTypeLabel = "notice";
 		}
+	}
+	
+	public String getCategoryTypeLabel() {
+		return categoryTypeLabel;
 	}
 	
 	public String getCategoryName() {

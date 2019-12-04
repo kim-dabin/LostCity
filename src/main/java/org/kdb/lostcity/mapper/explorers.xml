@@ -13,9 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values( #{email}, #{password}, #{nickname}, #{profile} )	
 	</insert>
 	<select id="selectUser" resultType="Explorer" parameterType="int">
-		SELECT no, email, password, nickname, profile, check_email checkEmail, keep_login keepLogin, score, check_email_time checkEmailTime
-		FROM explorers
-		WHERE no = #{no}
+		SELECT e.no, e.email, e.password, e.nickname, e.profile, e.check_email checkEmail, 
+		e.keep_login keepLogin, e.score, e.check_email_time checkEmailTime, 
+		(SELECT COUNT(*) FROM explorers WHERE score >= e.score) AS ranking
+		FROM explorers e
+		WHERE e.no = #{no}
 	</select>
 	<select id="selectList" resultType="Explorer">
 		SELECT no, email, password, nickname, profile, check_email checkEmail, keep_login keepLogin, score, check_email_time checkEmailTime

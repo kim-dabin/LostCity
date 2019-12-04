@@ -33,7 +33,7 @@ public class ExplorersDAOImpl implements ExplorersDAO {
 	@Override
 	public Explorer selectUser(int no) {
 		// TODO Auto-generated method stub
-		return session.selectOne("explorers.selectList", no);
+		return session.selectOne("explorers.selectUser", no);
 	}
 	
 	@Override

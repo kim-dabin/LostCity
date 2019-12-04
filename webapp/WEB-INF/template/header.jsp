@@ -16,12 +16,12 @@
 	<h2 class="screen_out">유저정보</h2>
 	<img src="${logUser.profile }"
 	class="profile_on"  width="60" height="60"
-	alt="테스터"
-	title="테스터"/>
+	alt="유저 프로필"
+	title="${logUser.nickname }"/>
 	<div id="profilePopup" class="profile_on">
 		<ul id="profileList">
-			<li class="profile"><a href="/user.jsp?no=3"><span class="open_door" >문</span> 마이페이지</a></li><!--//.profile -->
-			<li class="profile"><a href="/logout.do"><span class="close_door" >문</span> 로그아웃</a></li><!--//.profile -->
+			<li class="profile"><a href="/explorer/${logUser.no }"><span class="open_door" >문</span> 마이페이지</a></li><!--//.profile -->
+			<li class="profile"><a href="/log"><span class="close_door" >문</span> 로그아웃</a></li><!--//.profile -->
 		</ul><!--//profileList -->
 	</div><!--//#profilePopup -->
 </div><!--// loginBox  -->

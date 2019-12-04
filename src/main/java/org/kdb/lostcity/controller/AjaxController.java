@@ -49,6 +49,28 @@ public class AjaxController {
 	@Autowired
 	private RankingService rankingService;
 	
+	
+	@RequestMapping(value="/post/{postNo}/comment/{no}", method=RequestMethod.POST)
+	public String getPageCommentByExplorer(@PathVariable int postNo,@PathVariable int no ) {
+		Comment info = new Comment();
+		info.setPostNo(postNo);
+		info.setNo(no);
+		int page = commentsService.getPageByExplorer(info);
+		return "{\"commentPage\":"+page+"}";
+	}
+	
+	@RequestMapping(value="/explorer/{explorerNo}/comments", method=RequestMethod.POST)
+	public List<Comment> getCommentsByExplorer(@PathVariable int explorerNo){
+		//System.out.println("explorerNo"+" "+explorerNo);
+		return commentsService.getListByExplorer(explorerNo);
+	}
+	
+	@RequestMapping(value="/explorer/{explorerNo}/posting", method=RequestMethod.POST)
+	public List<Post> getPostsByExplorer(@PathVariable int explorerNo){
+		//System.out.println("explorerNo"+" "+explorerNo);
+		return postsService.getPostsByExplorer(explorerNo);
+	}
+	
 	@RequestMapping(value="/community/orderPosts", method=RequestMethod.POST)
 	public Map<String, Post> getOrderPosts(Post info){
 		return postsService.getOrderPosts(info);
@@ -62,7 +84,7 @@ public class AjaxController {
 		
 		//return "{\"y\":"+map.get("y").toString()+",\"percentage\":"+map.get("percentage").toString()+"}";
 		//return map;
-		return rankingService.getRanking();
+		return explorersService.getRanking();
 	}
 	
 	@RequestMapping(value="/comment/{no}", method=RequestMethod.GET)
@@ -72,7 +94,12 @@ public class AjaxController {
 	
 	@RequestMapping(value="/post/{postNo}/comment/{no}", method=RequestMethod.DELETE)
 	public int deleteComment(@PathVariable int no, @PathVariable int postNo) {
-		return commentsService.delete(no, postNo);
+		return commentsService.delete(no, postNo, "post");
+	}
+	
+	@RequestMapping(value="/explorer/{explorerNo}/comment/{no}", method=RequestMethod.DELETE)
+	public int deleteCommentByExplorer(@PathVariable int no, @PathVariable int explorerNo) {
+		return commentsService.delete(no, explorerNo,"comment");
 	}
 	
 	@RequestMapping(value="/post/{postNo}/comment/page/{page}", method=RequestMethod.GET)

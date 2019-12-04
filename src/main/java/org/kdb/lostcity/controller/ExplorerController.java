@@ -1,13 +1,20 @@
 package org.kdb.lostcity.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 
 import org.kdb.lostcity.service.ExplorersService;
+import org.kdb.lostcity.service.RankingService;
+import org.kdb.lostcity.util.EloRatingUtil;
 import org.kdb.lostcity.vo.Explorer;
+import org.kdb.lostcity.vo.StatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +25,15 @@ public class ExplorerController {
 	
 	@Autowired
 	private ExplorersService explorersSerivce;
+
+	
+	@RequestMapping(value="/explorer/{no}")
+	public String userPage(@PathVariable int no, Model model) {
+		
+		model.addAllAttributes(explorersSerivce.getUserData(no));
+		
+		return "userPage";
+	}
 	
 	@RequestMapping(value="/join", method = RequestMethod.POST)
 	public String join(Explorer user) {

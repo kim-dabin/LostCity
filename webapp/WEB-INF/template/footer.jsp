@@ -20,4 +20,5 @@
 <script src="/js/fix-footer.js"></script>
 <script>
 _.templateSettings = {interpolate: /\<\@\=(.+?)\@\>/gim,evaluate: /\<\@([\s\S]+?)\@\>/gim,escape: /\<\@\-(.+?)\@\>/gim};
+moment.locale("ko"); 
 </script>

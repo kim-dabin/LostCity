@@ -13,5 +13,7 @@ public interface CommentsDAO {
 	public int selectAmount(int postNo);
 	public Comment selectOne(int no);
 	public int deleteALL(int postNo);
-
+	public List<Comment> selectListByUser(int explorerNo);
+	public int selectPageByUser(Comment info);
+	public int selectAmountByUser(int explorerNo);
 }

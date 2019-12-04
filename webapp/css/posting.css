@@ -123,7 +123,9 @@
 			word-break: break-all;
 			/*background-color: red;*/
 		}
-
+		 #contentInner>.box_view ol, #contentInner>.box_view ul{
+			list-style: inherit;
+		} 
 		#contentInner .box_like{
 			/*background-color: green;*/
 			text-align: center;

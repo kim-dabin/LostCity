@@ -4,6 +4,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="posts">
 
+<select id="selectAmountByUser" resultType="int" parameterType="int">
+	select count(no)
+	from posts
+	where explorer_no=#{explorerNo}	
+
+</select>
+
+
+<select id="selectListByUser" parameterType="int" resultType="Post">
+select  TB2.*
+	from(select TB1.*, row_number() over(ORDER BY no DESC) as rowNum 
+	from(
+	SELECT p.no no, p.explorer_no explorerNo, p.title title, p.content content, p.category_type categoryType, p.regdate regdate, e.email email, e.nickname nickname, e.profile profile, e.score score,
+
+(SELECT COUNT(l.no) FROM likes l WHERE p.no = l.content_no AND l.content_type='P') as countLikes, 
+(SELECT count(c.no) FROM comments c WHERE p.no = c.post_no ) as countComments, 
+(SELECT count(*) FROM views v WHERE p.no = v.post_no ) as countViews
+FROM posts p 
+left join explorers e
+on p.explorer_no = e.no
+WHERE p.explorer_no = #{explorerNo}
+order by p.no DESC	)as TB1 
+		order by TB1.no desc 
+)as TB2
+
+
+
+
+
+
+
+</select>
+
+<insert id="insert" parameterType="Post">
+	insert into posts(explorer_no, title, content, category_type)
+	values(#{explorerNo}, #{title}, #{content}, #{categoryType})
+</insert>
+
+<select id="selectLastInsertID" resultType="int">
+select LAST_INSERT_ID()
+
+</select>
+
 <delete id="delete" parameterType="int">
 	DELETE FROM posts where no=#{no}
 </delete>

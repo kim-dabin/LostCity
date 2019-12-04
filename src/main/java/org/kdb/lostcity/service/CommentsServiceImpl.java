@@ -21,6 +21,20 @@ public class CommentsServiceImpl implements CommentsService {
 	@Autowired
 	private LikesDAO likesDAO;
 	
+	
+	
+	@Override
+	public int getPageByExplorer(Comment info) {
+		// TODO Auto-generated method stub
+		return commentsDAO.selectPageByUser(info);
+	}
+	
+	@Override
+	public List<Comment> getListByExplorer(int explorerNo) {
+
+		return commentsDAO.selectListByUser(explorerNo);
+	}
+	
 	@Override
 	public Comment getComment(int no) {
 		// TODO Auto-generated method stub
@@ -29,13 +43,17 @@ public class CommentsServiceImpl implements CommentsService {
 	
 	@Override
 	@Transactional
-	public int delete(int no, int postNo) {
+	public int delete(int no, int mountNo, String type) {
 		// TODO Auto-generated method stub
 		int result =0;
 		
 		if(commentsDAO.delete(no)>0) {
-			result=commentsDAO.selectAmount(postNo);
 			
+			if(type.equals("post")) {
+			result=commentsDAO.selectAmount(mountNo);
+			}else if(type.equals("comment")) {
+				result=commentsDAO.selectAmountByUser(mountNo);
+			}
 		}
 		
 		return result;

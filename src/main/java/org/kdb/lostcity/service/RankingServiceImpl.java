@@ -20,7 +20,11 @@ public class RankingServiceImpl implements RankingService {
 	@Autowired
 	private EloRatingUtil eru;
 	
-
+	@Override
+	public StatisticVO getStat() {
+		
+		return explorersDAO.selectStatistics();
+	}
 	@Override
 	public Map<String, Object>  getRanking() {
 		

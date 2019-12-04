@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>유저페이지</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/kakao.font.css" />
+    
+    <link rel="stylesheet" href="css/default.css" />
+    <link rel="stylesheet" href="css/user.css" />
+    <link rel="icon" type="image/x-icon" href="img/logo.png"/>
+    <script src="js/jquery.js"></script>
+    <link rel="icon" type="image/x-icon" href="img/logo_dust.png"/>
+
+    </head>
+    <body>
+        <div id="header">
+            <h1><a href="waiting.html">The Lost City</a></h1>
+            <!-- <div id="gnb" >
+                <h2 class="screen_out"> 주요 서비스 </h2>
+                <ul>
+                    <li class="nav"> <a class="on" href="waiting.html">대기실</a> </li>
+                    <li class="nav"> <a  href="" >랭 킹</a> </li>
+                    <li class="nav"> <a  href="community.html" >커뮤니티</a> </li>
+                </ul>
+            </div>
+            //#gnb -->
+            <div id="loginBox">
+             
+                <h2 class="screen_out">유저정보</h2>
+                <img src="profile/profile.png"
+                class="profile_on"  width="60" height="60"
+                alt="테스터"
+                title="테스터"/>
+                <div id="profilePopup" class="profile_on">
+                    <ul id="profileList">
+                        <li class="profile"><a href="/user.jsp?no=3"><span class="open_door" >문</span> 마이페이지</a></li><!--//.profile -->
+                        <li class="profile"><a href="/logout.do"><span class="close_door" >문</span> 로그아웃</a></li><!--//.profile -->
+                    </ul><!--//profileList -->
+                </div><!--//#profilePopup -->
+            </div><!--// loginBox  -->
+            <script>
+                const $profile = $("#loginBox img");
+                const $profileTarget = $("#profilePopup");
+
+
+                $profile.click(function () {
+                    $profileTarget.toggle();
+        });// profileBox click end
+
+                $("html").click(function(e){
+                    if(!$(e.target).hasClass("profile_on")){
+                        $profileTarget.hide();
+                    }
+        });//
+    </script>
+</div><!-- //header -->
+<div id="content">
+    <div class="aux">
+        <div id="profileInfoWrap">
+            <div class="box_user_info">
+
+                <div class="user_info">
+                 <img src="profile/profile.png" />
+                 <strong>짱구짱구짱</strong>
+                 <div title="정보 수정" class="btn_profile_setting">  
+                 <i class="fas fa-cog"></i>
+                 </div><!--//.btn_profile_setting -->
+             </div><!--//user_info -->
+             <div class="box_tier_info tier_1" title="9 티어 - 하위 4%">  
+                 <p class="ranking tier_1"><i class="fas fa-university"></i> <span>1000000</span>위</p><!--//.ranking -->        
+             </div><!--//.box_tier_info -->
+
+         </div><!--//.box_user_info -->
+
+        
+         <div class="box_user_ability">
+             <div class="score_elo">
+                <strong><i class="fas fa-star"></i> 980</strong> ES
+            </div><!--//score_elo -->
+            <div class="box_winratio" >
+                <span>승 률</span>
+                <div class="winratio_graph">
+
+                    <div class="winratio_graph_fill winratio_graph_fill_left" title="70승" style="width: 70%" ></div>
+                    <div class="winratio_graph_txt winratio_graph_txt_left" >70</div>
+                    <div class="winratio_graph_fill winratio_graph_fill_right" title="30패" ></div>
+                    <div class="winratio_graph_txt winratio_graph_txt_right">30</div>
+
+                </div><!--//winratio_graph -->
+                <span class="winratio_txt">70%</span>
+
+
+            </div><!--//box_winratio -->
+            <p class="score_best">
+             <!-- Best Score <strong>269</strong> -->
+         </p>
+     </div><!--//box_user_ability -->
+
+
+
+
+ </div><!--//#profileInfoWrap -->
+ <div class="popup_bg">
+     <div id="profileSettingSection">
+
+            <h1>수정</h1>
+            <button class="btn_close" title="창닫기">
+                <span class="screen_out">프로필 수정창 닫기</span>
+                <i class="fas fa-times"></i>
+            </button>
+           
+            
+            <form action="" id="profileSettingForm" method="post">
+                <div id="profileSettingBox">
+                  <div id="profileBox" class="fas fa-user-circle no_image">
+                        <img src="profile/profile.jpg" width="140" height="140" id="profileImg"/>
+                        <label class="fas fa-camera">
+                            <input type="file" name="profile" id="profile" accept="image/*"/>
+                        </label>
+                            <button type="button" class="delete fas fa-times"><span class="screen_out">삭제</span></button>
+                        </div><!-- //profileBox -->
+
+                        <div id="nicknameSettingBox">
+
+                            <label for="nicknameInp" class="screen_out">닉네임</label>
+                            <input id="nicknameInp" type="text" name="nickname" placeholder="닉네임을 입력해주세요" />
+                            <span class="inp_border"></span>
+                        </div><!--//#nicknameSettingBox -->
+
+                    </div><!--//profileSettingBox -->
+                    <div id="profileSettingBtn">
+                <button class="btn" type="submit" >확인</button>
+            </div><!--//#profileSettingBtn -->
+            </form>
+</div><!--//#profileSettingBox -->
+
+ </div>
+ 
+<script type="text/javascript">
+    const $profileSettingBtn = $(".btn_profile_setting");
+    const $nicknameInp = $("#nicknameInp");
+    const $popupCloseBtn = $(".btn_close");
+    const $bgPopup = $(".popup_bg");
+    $nicknameInp.val("현재닉네임");
+    $profileSettingBtn.on("click",openPopup);
+     $popupCloseBtn.on("click",closePopup);
+    function openPopup(){
+        if(!$bgPopup.hasClass("open")){
+            $bgPopup.addClass("open");
+        }
+        
+    }
+    function closePopup(){
+         if($bgPopup.hasClass("open")){
+            $bgPopup.removeClass("open");
+        }
+    }
+
+
+</script>
+
+ <div id="gameInfoWrap">   
+     <div id="citiesScoreListBox">
+         <h3>문명 누적 점수</h3>
+         <ul>   
+            <li class="score_city red">
+                <div>
+                    <span>123,456,789</span>
+                </div>     
+            </li>
+            <li class="score_city blue">
+                <div>
+                    <span>-8,041</span>
+                </div> 
+            </li>
+            <li class="score_city green">
+               <div>
+                <span>200</span>
+            </div> 
+        </li>
+        <li class="score_city yellow">
+            <div>
+                <span>200</span>
+            </div> 
+        </li>
+        <li class="score_city white">
+           <div>
+            <span>200</span>
+        </div> 
+    </li>
+</ul>
+
+</div><!--//citiesScoreListBox -->
+
+<div id="listTab">
+    <h2 class="screen_out">탭 목록</h2>
+    <ul>
+        <li class="tab">
+         <input id="gameLogTab" checked="checked" class="hidden inp_tab"  type="radio" name="tab" value="gamelog"/>
+          <label class="item_tab"  for="gameLogTab">게임로그</label>
+
+
+        </li>
+        <li class="tab">
+             <input id="postingTab"  class="hidden inp_tab" type="radio" name="tab" value="posting"/>
+          <label class="item_tab"  for="postingTab">작성 글</label>
+        </li>
+        <li class="tab">
+         <input id="commentTab"  class="hidden inp_tab" type="radio" name="tab" value="comments"/>
+          <label class="item_tab"  for="commentTab">작성 댓글</label>
+        </li>
+    </ul>
+
+</div>
+
+<div id="articleSection">
+<div id="commentBox" class="comments article" >
+    
+    <div class="box_sort">
+        <button class="btn btn_checked_all">전체선택</button>
+        <a class="btn" href="">삭제</a>
+    </div><!--//box_sort -->
+    <div id="commentList">
+        <h3 class="screen_out">작성 댓글 목록</h3>
+        <ul>
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+            <li class="reply">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                <a href="">
+                   <div class="box_contents">
+                        <h4 class="contents" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                   
+
+                    </div><!--//.box_title -->
+
+                    <div class="box_title">
+                        <!-- <span>원문제목:</span> -->
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    </div>
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">100000000</strong>
+                    </div>
+                    
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.reply -->
+
+        </ul>
+    </div><!--//#commentList -->
+
+
+</div><!--//#commentBox -->  
+
+<div id="postingBox" class="posting article" >
+    <div class="box_sort">
+        <button class="btn btn_checked_all">전체선택</button>
+        <a class="btn" href="">삭제</a>
+    </div><!--//box_sort -->
+    <div id="postingList">
+        <h3 class="screen_out">작성 글 목록</h3>
+        <ul>
+            <li class="post">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                   <div class="cate">
+                    ( <span>건의/오류</span> )   
+                   </div>
+                 <a href="">
+                   <div class="box_title">
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    <span class="comment">21222</span>
+
+                    </div><!--//.box_title -->
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">0</strong>
+                    </div>
+                    <span class="hit"><i class="fa fa-eye"></i>
+                     0</span>
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.post -->
+            <li class="post">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                   <div class="cate">
+                    ( <span>건의/오류</span> )   
+                   </div>
+                 <a href="">
+                   <div class="box_title">
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    <span class="comment">21222</span>
+
+                    </div><!--//.box_title -->
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">0</strong>
+                    </div>
+                    <span class="hit"><i class="fa fa-eye"></i>
+                     0</span>
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.post -->
+            <li class="post">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                   <div class="cate">
+                    ( <span>건의/오류</span> )   
+                   </div>
+                 <a href="">
+                   <div class="box_title">
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    <span class="comment">21222</span>
+
+                    </div><!--//.box_title -->
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">0</strong>
+                    </div>
+                    <span class="hit"><i class="fa fa-eye"></i>
+                     0</span>
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.post -->
+            <li class="post">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                   <div class="cate">
+                    ( <span>건의/오류</span> )   
+                   </div>
+                 <a href="">
+                   <div class="box_title">
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    <span class="comment">21222</span>
+
+                    </div><!--//.box_title -->
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">0</strong>
+                    </div>
+                    <span class="hit"><i class="fa fa-eye"></i>
+                     0</span>
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.post -->
+            <li class="post">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                   <div class="cate">
+                    ( <span>건의/오류</span> )   
+                   </div>
+                 <a href="">
+                   <div class="box_title">
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    <span class="comment">21222</span>
+
+                    </div><!--//.box_title -->
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">0</strong>
+                    </div>
+                    <span class="hit"><i class="fa fa-eye"></i>
+                     0</span>
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.post -->
+            <li class="post">
+                <input type="checkbox" name="no" value="" />
+                
+               
+                   <div class="cate">
+                    ( <span>건의/오류</span> )   
+                   </div>
+                 <a href="">
+                   <div class="box_title">
+                        <h4 class="title" 
+                        title="제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.제목입니다.">
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                        제목입니다.제목입니다.제목입니다.
+                    </h4>
+
+                    <span class="comment">21222</span>
+
+                    </div><!--//.box_title -->
+                    
+
+                    <div class="btn_like">
+                        <i class="fas fa-heart"></i>
+                        <span class="screen_out">좋아요</span>
+                        <strong class="num_like">0</strong>
+                    </div>
+                    <span class="hit"><i class="fa fa-eye"></i>
+                     0</span>
+
+
+                    <time>20분 전</time>
+
+                </a>
+                
+            </li><!--//.post -->
+
+        </ul>
+    </div><!--//#postingList -->
+</div><!--//#postingBox -->  
+  <script type="text/javascript">
+    
+    const $tab = $(".inp_tab");
+    const $checkedAllBtn = $(".btn_checked_all");
+
+    //let checkedTabValue = "";
+
+    $checkedAllBtn.on("click",function(){
+        const $list = $($(this).parent().siblings());
+        const inp = $list.find('input');
+        //console.log(inp.prop("checked"));
+        if(inp.prop("checked")){
+            //console.log(inp)
+             inp.prop("checked",false);
+        }else{
+            inp.prop("checked",true);
+        }
+    });
+
+    $tab.on("click",function(){
+       let checkedTabValue = $("input[name=tab]:checked").val();
+       const $checkedTab = $("."+checkedTabValue);
+       const $otherTab = $(".article");
+        //console.log(checkedTabValue);
+        
+        if(!$checkedTab.hasClass('on')){
+            
+            $otherTab.removeClass('on');
+        
+        }
+
+        $checkedTab.addClass('on');
+        
+        
+    });
+
+
+</script>
+    
+<div id="gameLogBox" class="gamelog article on">
+    <div class="box_sort">
+        <input id="lately" type="radio" name="sortingType" value="lately" checked="checked" />
+        <label for="lately">최신순</label>
+        <input type="radio" id="scoreHigh" name="sortingType" value="scoreHigh"/>
+        <label for="scoreHigh">점수순         
+        </label>        
+
+    </div><!--//box_sort -->
+
+
+    <h3 class="screen_out">게임 로그</h3>
+    <ul id="gameLogList">
+        <li class="box_log lose">
+            <div class="info_game">
+             <h4 class="screen_out">게임정보</h4>
+             <ul>
+                <li class="result_game">
+                    <span>패</span>
+                </li>
+                <li class="time length_game">
+                    <span>30:00</span>
+                </li>
+                <li class="time timestamp_game">
+                    <span>2019년 6월 1일</span>
+                </li>
+            </ul>
+        </div><!--//info_game --> 
+        <div class="vs">
+            <span>VS</span>
+        </div>     
+        <div class="desc_result">
+            <h4 class="screen_out">게임 결과 상세</h4>
+            <ul>
+                <li class="result user">
+                    <div title="티어1" class="user_thumb tier_1">
+                     <img src="img/card_back.png">  
+                 </div>
+                 <div class="box_cities_score">
+                   <div class="total_score" title="최종 점수">
+                    <span>1000</span>  
+                </div><!--//total_score -->
+                <div class="list_score">
+                   <ul>
+                       <li class="score_city red">
+                        <span>
+                            200
+                        </span>
+
+                    </li>
+                    <li class="score_city blue">
+                      <span>
+                        200
+                    </span>
+                </li>
+                <li class="score_city green">
+                  <span>
+                    200
+                </span>
+            </li>
+            <li class="score_city yellow">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city white">
+          <span>
+            200
+        </span>
+    </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_2">
+        <a href="" title="짱구">
+            <img src="profile/profile2.png">
+        </a>
+
+    </div>
+    <div class="box_cities_score">
+       <div class="total_score" title="최종 점수">
+         <span>-1000</span>  
+     </div><!--//total_score -->
+     <div class="list_score">
+       <ul>
+           <li class="score_city red">
+            <span>-200</span> 
+        </li>
+        <li class="score_city blue">
+         <span>-200</span> 
+     </li>
+     <li class="score_city green">
+         <span>-200</span> 
+     </li>
+     <li class="score_city yellow">
+         <span>-200</span> 
+     </li>
+     <li class="score_city white">
+         <span>-200</span> 
+     </li>
+ </ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+
+
+<li class="box_log win">
+    <div class="info_game">
+     <h4 class="screen_out">게임정보</h4>
+     <ul>
+        <li class="result_game">
+            <span>승</span>
+        </li>
+        <li class="time length_game">
+            <span>30:00</span>
+        </li>
+        <li class="time timestamp_game">
+            <span>2019년 6월 1일</span>
+        </li>
+    </ul>
+</div><!--//info_game --> 
+<div class="vs">
+    <span>VS</span>
+</div>     
+<div class="desc_result">
+    <h4 class="screen_out">게임 결과 상세</h4>
+    <ul>
+        <li class="result user">
+            <div title="티어1" class="user_thumb tier_1">
+             <img src="img/card_back.png">  
+         </div>
+         <div class="box_cities_score">
+           <div class="total_score" title="최종 점수">
+            <span>1000</span>  
+        </div><!--//total_score -->
+        <div class="list_score">
+           <ul>
+               <li class="score_city red">
+                <span>
+                    200
+                </span>
+
+            </li>
+            <li class="score_city blue">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city green">
+          <span>
+            200
+        </span>
+    </li>
+    <li class="score_city yellow">
+      <span>
+        200
+    </span>
+</li>
+<li class="score_city white">
+  <span>
+    200
+</span>
+</li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_2">
+     <a href="" title="짱구">
+        <img src="profile/profile2.png">
+    </a>
+</div>
+<div class="box_cities_score">
+   <div class="total_score" title="최종 점수">
+     <span>-1000</span>  
+ </div><!--//total_score -->
+ <div class="list_score">
+   <ul>
+       <li class="score_city red">
+        <span>-200</span> 
+    </li>
+    <li class="score_city blue">
+     <span>-200</span> 
+ </li>
+ <li class="score_city green">
+     <span>-200</span> 
+ </li>
+ <li class="score_city yellow">
+     <span>-200</span> 
+ </li>
+ <li class="score_city white">
+     <span>-200</span> 
+ </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+
+
+
+<li class="box_log lose">
+    <div class="info_game">
+     <h4 class="screen_out">게임정보</h4>
+     <ul>
+        <li class="result_game">
+            <span>패</span>
+        </li>
+        <li class="time length_game">
+            <span>30:00</span>
+        </li>
+        <li class="time timestamp_game">
+            <span>2019년 6월 1일</span>
+        </li>
+    </ul>
+</div><!--//info_game --> 
+<div class="vs">
+    <span>VS</span>
+</div>     
+<div class="desc_result">
+    <h4 class="screen_out">게임 결과 상세</h4>
+    <ul>
+        <li class="result user">
+            <div title="티어1" class="user_thumb tier_1">
+             <img src="img/card_back.png">  
+         </div>
+         <div class="box_cities_score">
+           <div class="total_score" title="최종 점수">
+            <span>1000</span>  
+        </div><!--//total_score -->
+        <div class="list_score">
+           <ul>
+               <li class="score_city red">
+                <span>
+                    200
+                </span>
+
+            </li>
+            <li class="score_city blue">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city green">
+          <span>
+            200
+        </span>
+    </li>
+    <li class="score_city yellow">
+      <span>
+        200
+    </span>
+</li>
+<li class="score_city white">
+  <span>
+    200
+</span>
+</li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_9">
+     <a href="" title="짱구">
+        <img src="profile/profile2.png">
+    </a>
+</div>
+<div class="box_cities_score">
+   <div class="total_score" title="최종 점수">
+     <span>-1000</span>  
+ </div><!--//total_score -->
+ <div class="list_score">
+   <ul>
+       <li class="score_city red">
+        <span>-200</span> 
+    </li>
+    <li class="score_city blue">
+     <span>-200</span> 
+ </li>
+ <li class="score_city green">
+     <span>-200</span> 
+ </li>
+ <li class="score_city yellow">
+     <span>-200</span> 
+ </li>
+ <li class="score_city white">
+     <span>-200</span> 
+ </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+
+
+
+<li class="box_log lose">
+    <div class="info_game">
+     <h4 class="screen_out">게임정보</h4>
+     <ul>
+        <li class="result_game">
+            <span>패</span>
+        </li>
+        <li class="time length_game">
+            <span>30:00</span>
+        </li>
+        <li class="time timestamp_game">
+            <span>2019년 6월 1일</span>
+        </li>
+    </ul>
+</div><!--//info_game --> 
+<div class="vs">
+    <span>VS</span>
+</div>     
+<div class="desc_result">
+    <h4 class="screen_out">게임 결과 상세</h4>
+    <ul>
+        <li class="result user">
+            <div title="티어1" class="user_thumb tier_1">
+             <img src="img/card_back.png">  
+         </div>
+         <div class="box_cities_score">
+           <div class="total_score" title="최종 점수">
+            <span>1000</span>  
+        </div><!--//total_score -->
+        <div class="list_score">
+           <ul>
+               <li class="score_city red">
+                <span>
+                    200
+                </span>
+
+            </li>
+            <li class="score_city blue">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city green">
+          <span>
+            200
+        </span>
+    </li>
+    <li class="score_city yellow">
+      <span>
+        200
+    </span>
+</li>
+<li class="score_city white">
+  <span>
+    200
+</span>
+</li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_1">
+      <a href="" title="짱구">
+        <img src="profile/profile2.png">
+    </a>
+</div>
+<div class="box_cities_score">
+   <div class="total_score" title="최종 점수">
+     <span>-1000</span>  
+ </div><!--//total_score -->
+ <div class="list_score">
+   <ul>
+       <li class="score_city red">
+        <span>-200</span> 
+    </li>
+    <li class="score_city blue">
+     <span>-200</span> 
+ </li>
+ <li class="score_city green">
+     <span>-200</span> 
+ </li>
+ <li class="score_city yellow">
+     <span>-200</span> 
+ </li>
+ <li class="score_city white">
+     <span>-200</span> 
+ </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+
+
+<li class="box_log win">
+    <div class="info_game">
+     <h4 class="screen_out">게임정보</h4>
+     <ul>
+        <li class="result_game">
+            <span>승</span>
+        </li>
+        <li class="time length_game">
+            <span>1:30:00</span>
+        </li>
+        <li class="time timestamp_game">
+            <span>2019년 12월 12일</span>
+        </li>
+    </ul>
+</div><!--//info_game --> 
+<div class="vs">
+    <span>VS</span>
+</div>     
+<div class="desc_result">
+    <h4 class="screen_out">게임 결과 상세</h4>
+    <ul>
+        <li class="result user">
+            <div title="티어1" class="user_thumb tier_1">
+             <img src="img/card_back.png">  
+         </div>
+         <div class="box_cities_score">
+           <div class="total_score" title="최종 점수">
+            <span>1000</span>  
+        </div><!--//total_score -->
+        <div class="list_score">
+           <ul>
+               <li class="score_city red">
+                <span>
+                    200
+                </span>
+
+            </li>
+            <li class="score_city blue">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city green">
+          <span>
+            200
+        </span>
+    </li>
+    <li class="score_city yellow">
+      <span>
+        200
+    </span>
+</li>
+<li class="score_city white">
+  <span>
+    200
+</span>
+</li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_7">
+     <a href="" title="짱구">
+        <img src="profile/profile2.png">
+    </a>
+</div>
+<div class="box_cities_score">
+   <div class="total_score" title="최종 점수">
+     <span>-1000</span>  
+ </div><!--//total_score -->
+ <div class="list_score">
+   <ul>
+       <li class="score_city red">
+        <span>-200</span> 
+    </li>
+    <li class="score_city blue">
+     <span>-200</span> 
+ </li>
+ <li class="score_city green">
+     <span>-200</span> 
+ </li>
+ <li class="score_city yellow">
+     <span>-200</span> 
+ </li>
+ <li class="score_city white">
+     <span>-200</span> 
+ </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+<li class="box_log win">
+    <div class="info_game">
+     <h4 class="screen_out">게임정보</h4>
+     <ul>
+        <li class="result_game">
+            <span>승</span>
+        </li>
+        <li class="time length_game">
+            <span>1:30:00</span>
+        </li>
+        <li class="time timestamp_game">
+            <span>2019년 12월 12일</span>
+        </li>
+    </ul>
+</div><!--//info_game --> 
+<div class="vs">
+    <span>VS</span>
+</div>     
+<div class="desc_result">
+    <h4 class="screen_out">게임 결과 상세</h4>
+    <ul>
+        <li class="result user">
+            <div title="티어1" class="user_thumb tier_1">
+             <img src="img/card_back.png">  
+         </div>
+         <div class="box_cities_score">
+           <div class="total_score" title="최종 점수">
+            <span>1000</span>  
+        </div><!--//total_score -->
+        <div class="list_score">
+           <ul>
+               <li class="score_city red">
+                <span>
+                    200
+                </span>
+
+            </li>
+            <li class="score_city blue">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city green">
+          <span>
+            200
+        </span>
+    </li>
+    <li class="score_city yellow">
+      <span>
+        200
+    </span>
+</li>
+<li class="score_city white">
+  <span>
+    200
+</span>
+</li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_7">
+     <a href="" title="짱구">
+        <img src="profile/profile2.png">
+    </a>
+</div>
+<div class="box_cities_score">
+   <div class="total_score" title="최종 점수">
+     <span>-1000</span>  
+ </div><!--//total_score -->
+ <div class="list_score">
+   <ul>
+       <li class="score_city red">
+        <span>-200</span> 
+    </li>
+    <li class="score_city blue">
+     <span>-200</span> 
+ </li>
+ <li class="score_city green">
+     <span>-200</span> 
+ </li>
+ <li class="score_city yellow">
+     <span>-200</span> 
+ </li>
+ <li class="score_city white">
+     <span>-200</span> 
+ </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+<li class="box_log win">
+    <div class="info_game">
+     <h4 class="screen_out">게임정보</h4>
+     <ul>
+        <li class="result_game">
+            <span>승</span>
+        </li>
+        <li class="time length_game">
+            <span>1:30:00</span>
+        </li>
+        <li class="time timestamp_game">
+            <span>2019년 12월 12일</span>
+        </li>
+    </ul>
+</div><!--//info_game --> 
+<div class="vs">
+    <span>VS</span>
+</div>     
+<div class="desc_result">
+    <h4 class="screen_out">게임 결과 상세</h4>
+    <ul>
+        <li class="result user">
+            <div title="티어1" class="user_thumb tier_1">
+             <img src="img/card_back.png">  
+         </div>
+         <div class="box_cities_score">
+           <div class="total_score" title="최종 점수">
+            <span>1000</span>  
+        </div><!--//total_score -->
+        <div class="list_score">
+           <ul>
+               <li class="score_city red">
+                <span>
+                    200
+                </span>
+
+            </li>
+            <li class="score_city blue">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city green">
+          <span>
+            200
+        </span>
+    </li>
+    <li class="score_city yellow">
+      <span>
+        200
+    </span>
+</li>
+<li class="score_city white">
+  <span>
+    200
+</span>
+</li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_7">
+     <a href="" title="짱구">
+        <img src="profile/profile2.png">
+    </a>
+</div>
+<div class="box_cities_score">
+   <div class="total_score" title="최종 점수">
+     <span>-1000</span>  
+ </div><!--//total_score -->
+ <div class="list_score">
+   <ul>
+       <li class="score_city red">
+        <span>-200</span> 
+    </li>
+    <li class="score_city blue">
+     <span>-200</span> 
+ </li>
+ <li class="score_city green">
+     <span>-200</span> 
+ </li>
+ <li class="score_city yellow">
+     <span>-200</span> 
+ </li>
+ <li class="score_city white">
+     <span>-200</span> 
+ </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+<li class="box_log win">
+    <div class="info_game">
+     <h4 class="screen_out">게임정보</h4>
+     <ul>
+        <li class="result_game">
+            <span>승</span>
+        </li>
+        <li class="time length_game">
+            <span>1:30:00</span>
+        </li>
+        <li class="time timestamp_game">
+            <span>2019년 12월 12일</span>
+        </li>
+    </ul>
+</div><!--//info_game --> 
+<div class="vs">
+    <span>VS</span>
+</div>     
+<div class="desc_result">
+    <h4 class="screen_out">게임 결과 상세</h4>
+    <ul>
+        <li class="result user">
+            <div title="티어1" class="user_thumb tier_1">
+             <img src="img/card_back.png">  
+         </div>
+         <div class="box_cities_score">
+           <div class="total_score" title="최종 점수">
+            <span>1000</span>  
+        </div><!--//total_score -->
+        <div class="list_score">
+           <ul>
+               <li class="score_city red">
+                <span>
+                    200
+                </span>
+
+            </li>
+            <li class="score_city blue">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city green">
+          <span>
+            200
+        </span>
+    </li>
+    <li class="score_city yellow">
+      <span>
+        200
+    </span>
+</li>
+<li class="score_city white">
+  <span>
+    200
+</span>
+</li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_7">
+     <a href="" title="짱구">
+        <img src="profile/profile2.png">
+    </a>
+</div>
+<div class="box_cities_score">
+   <div class="total_score" title="최종 점수">
+     <span>-1000</span>  
+ </div><!--//total_score -->
+ <div class="list_score">
+   <ul>
+       <li class="score_city red">
+        <span>-200</span> 
+    </li>
+    <li class="score_city blue">
+     <span>-200</span> 
+ </li>
+ <li class="score_city green">
+     <span>-200</span> 
+ </li>
+ <li class="score_city yellow">
+     <span>-200</span> 
+ </li>
+ <li class="score_city white">
+     <span>-200</span> 
+ </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+<li class="box_log win">
+    <div class="info_game">
+     <h4 class="screen_out">게임정보</h4>
+     <ul>
+        <li class="result_game">
+            <span>승</span>
+        </li>
+        <li class="time length_game">
+            <span>1:30:00</span>
+        </li>
+        <li class="time timestamp_game">
+            <span>2019년 12월 12일</span>
+        </li>
+    </ul>
+</div><!--//info_game --> 
+<div class="vs">
+    <span>VS</span>
+</div>     
+<div class="desc_result">
+    <h4 class="screen_out">게임 결과 상세</h4>
+    <ul>
+        <li class="result user">
+            <div title="티어1" class="user_thumb tier_1">
+             <img src="img/card_back.png">  
+         </div>
+         <div class="box_cities_score">
+           <div class="total_score" title="최종 점수">
+            <span>1000</span>  
+        </div><!--//total_score -->
+        <div class="list_score">
+           <ul>
+               <li class="score_city red">
+                <span>
+                    200
+                </span>
+
+            </li>
+            <li class="score_city blue">
+              <span>
+                200
+            </span>
+        </li>
+        <li class="score_city green">
+          <span>
+            200
+        </span>
+    </li>
+    <li class="score_city yellow">
+      <span>
+        200
+    </span>
+</li>
+<li class="score_city white">
+  <span>
+    200
+</span>
+</li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+<li class="result rival">
+    <div title="티어2" class="user_thumb tier_7">
+     <a href="" title="짱구">
+        <img src="profile/profile2.png">
+    </a>
+</div>
+<div class="box_cities_score">
+   <div class="total_score" title="최종 점수">
+     <span>-7</span>  
+ </div><!--//total_score -->
+ <div class="list_score">
+   <ul>
+       <li class="score_city red">
+        <span>-200</span> 
+    </li>
+    <li class="score_city blue">
+     <span>-200</span> 
+ </li>
+ <li class="score_city green">
+     <span>-200</span> 
+ </li>
+ <li class="score_city yellow">
+     <span>-200</span> 
+ </li>
+ <li class="score_city white">
+     <span>-200</span> 
+ </li>
+</ul>
+</div><!--//list_score -->
+</div><!--//list_score -->
+</li><!--//result -->
+
+</ul>
+
+</div><!--//desc_result -->
+
+
+</li><!--//box_log -->
+
+
+
+</ul>
+
+</div><!--//gameLogBox -->        
+</div><!--//#articleSection -->
+</div><!--//#gameInfoWrap -->
+
+
+</div><!--//aux -->
+</div><!--//content-->
+<div id="footer">
+    <div id="policy">
+        <h4 class="screen_out">정책 및 약관</h4>
+        <ul>
+            <li><a href="">회사소개</a></li><!--
+	 --><li><a href="">광고</a></li><!--
+	 --><li><a href="">검색등록</a></li><!--
+	 --><li><a href="">제휴제안</a></li><!--
+	 --><li><a href="">이용약관</a></li><!--
+	 --><li><a href=""><strong>개인정보이용약관</strong></a></li><!--
+	 --><li><a href="">청소년보호정책</a></li><!--
+  --><li><a href="">고객센터</a></li>
+</ul>
+</div><!--//policy -->
+<address>&copy; 2019 <a href="">jbp.org</a></address>
+</div><!--// footer -->
+<script src="js/fix-footer.js"></script>
+<script>
+
+
+</script>
+</body>
+</html>

@@ -12,5 +12,9 @@ public interface PostsDAO {
 	public Post selectOne(int no);
 	public int delete(int no);
 	public List<Post> selectOrder(Map<String,Object> post);
+	public int insert(Post post);
+	public int selectLastInsertID();
+	public List<Post> selectListByUser(int explorerNo);
+	public int selectAmountByUser(int explorerNo);
 	
 }

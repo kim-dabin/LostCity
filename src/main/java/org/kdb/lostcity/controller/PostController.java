@@ -36,6 +36,25 @@ public class PostController {
 	public void setPostsService(PostsService postsService) {
 		this.postsService = postsService;
 	}
+
+	@RequestMapping(value="/write", method=RequestMethod.GET)
+	public String writeForm() {
+		return "writeForm";
+	}
+	
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String getPosting(Post post) {
+		System.out.println("categoryType: "+ post.getCategoryType());
+		int no = postsService.getPosting(post);
+		String param = "redirect:/community";
+		if(no>0) {
+			String paramNo = "/"+no+"/type/"+post.getCategoryType();
+			param+=paramNo;
+		}
+		
+		return param;
+	}
+	
 	
 	@RequestMapping(value="/community/{no}", method=RequestMethod.DELETE)
 	public String delete(@PathVariable int no) {

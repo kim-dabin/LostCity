@@ -14,6 +14,23 @@ public class CommentsDAOImpl implements CommentsDAO {
 	@Autowired
 	private SqlSession session;
 	
+	@Override
+	public int selectAmountByUser(int explorerNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("comments.selectAmountByUser", explorerNo);
+	}
+	
+	@Override
+	public int selectPageByUser(Comment info) {
+		// TODO Auto-generated method stub
+		return session.selectOne("comments.selectPageByUser", info);
+	}
+	
+	@Override
+	public List<Comment> selectListByUser(int explorerNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("comments.selectListByUser", explorerNo);
+	}
 	
 	@Override
 	public int deleteALL(int postNo) {

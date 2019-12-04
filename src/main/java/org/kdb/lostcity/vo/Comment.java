@@ -4,14 +4,34 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Comment implements Serializable {
-	private int no, explorerNo, postNo, countLikes;
-	private String content, profile, nickname;
+	private int no, explorerNo, postNo, countLikes, rowNum, page;
+	private String content, profile, nickname, title;
 	private Timestamp regdate;
 	
 	public Comment() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public int getRowNum() {
+		return rowNum;
+	}
 	
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+		
+		if(rowNum%5==0) this.page = rowNum/5;
+		else this.page=(rowNum/5)+1;
+	}
+	public int getPage() {
+		return page;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public void setCountLikes(int countLikes) {
 		this.countLikes = countLikes;
 	}

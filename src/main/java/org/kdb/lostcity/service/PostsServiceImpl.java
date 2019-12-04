@@ -29,6 +29,26 @@ public class PostsServiceImpl implements PostsService {
 	private PaginateUtil paginateUtil;
 	@Autowired
 	private EloRatingUtil eru;
+	
+	
+	@Override
+	public List<Post> getPostsByExplorer(int explorerNo) {
+		
+		return postsDAO.selectListByUser(explorerNo);
+	}
+	
+	@Override
+	@Transactional
+	public int getPosting(Post post) {
+		
+		if(postsDAO.insert(post)>0) {
+			
+		 return	postsDAO.selectLastInsertID();
+			
+		}
+		
+		return -1;
+	}
 
 	@Override
 	public Map<String, Post> getOrderPosts(Post info) {

@@ -142,7 +142,7 @@
 
 
 				<a class="article_href" href="/community/<@=post.no @>/type/<@=category @> ">
-					<span class="category <@=post.categoryType @> ">
+					<span class="category <@=post.categoryTypeLabel @> ">
 						<@=post.categoryName @>			
 					</span>
 

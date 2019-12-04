@@ -7,8 +7,12 @@
 <head>
 <meta charset="utf-8">
 <title>게시물</title>
+
 <c:import url="/WEB-INF/template/link.jsp" />
+
 <link rel="stylesheet" href="/css/posting.css" />
+ <link rel="stylesheet" href="/css/tui-editor-contents.min.css">
+
 </head>
 <body>
 	<c:import url="/WEB-INF/template/header.jsp">
@@ -22,7 +26,7 @@
 	
 				<div id="titleInner">
 				<c:out value="${param.cateType }"></c:out>
-					<div class="category ${posting.categoryType }">${posting.categoryName }</div>
+					<div class="category ${posting.categoryTypeLabel }">${posting.categoryName }</div>
 					<!--//.category -->
 					<div class="box_title">
 						<h3>${posting.title }</h3>
@@ -30,7 +34,7 @@
 					<!--//.box_title -->
 					<div class="box_info">
 						<div class="info_user">
-							<a href="user.html" title="${posting.nickname } 페이지로 이동">
+							<a href="/explorer/${posting.explorerNo }" title="${posting.nickname } 페이지로 이동">
 								<div class="thumb_user tier_${tier}" data-tier="${tier}">
 								
 									<img class="profile" src="${posting.profile }" />
@@ -61,7 +65,7 @@
 				</div>
 				<!--//#titleInner -->
 				<div id="contentInner">
-					<div class="box_view">${posting.content }</div>
+					<div class="box_view"></div>
 					<!--.box_view -->
 
 					<div class="box_like">
@@ -116,7 +120,7 @@
 				</div>
 				<!--//.box_btn -->
 				<div id="writeBtn">
-					<span></span> <a href="" class="btn">글쓰기</a>
+					<span></span> <a href="/write" class="btn">글쓰기</a>
 				</div>
 
 			</div>
@@ -170,10 +174,12 @@
 		<!--//aux -->
 	</div>
 	<!--//content-->
+	
 	<c:import url="/WEB-INF/template/footer.jsp"></c:import>
+<script src="/js/tui-editor-Viewer-full.min.js"></script>
 	<script type="text/template" id="commentsTmp">
 <@_.each(comments, function(comment) { @>
-<li class="comment">
+<li class="comment comment<@=comment.no @>" >
 	<a class="info_user" href="/explorer/<@=comment.explorerNo @>" title="<@=comment.nickname @>의 페이지로 이동">
 		<img src="<@=comment.profile @>" width="80">
 		<strong><@=comment.nickname @></strong>
@@ -210,7 +216,7 @@
 
 </script>
 
-	<script type="text/template" id="commentTmp">
+<script type="text/template" id="commentTmp">
 
 <li class="comment upload">
 	<a class="info_user" href="/explorer/<@=comment.explorerNo @>" title="<@=comment.nickname @>의 페이지로 이동">
@@ -265,9 +271,79 @@
 		const $prevBtn = $('.btn_prev');
 		
 		let countComments = $totalComments.text();//댓글 개수 
-		let last = Math.ceil((countComments/5));
-		let idx =1;
+		let last = Math.ceil((countComments/5));	
+		let content = '${posting.content }';
+		let commentNoStr = '${param.comment}';
+		let idx = 1;
+		let row = 0;//댓글 순서 
 		
+		if(commentNoStr!=''){ // 유저페이지에서 클릭한 댓글로 이동 
+		
+		 row = getCommentPage();
+		 idx = (row % 5 == 0)? row / 5 : (parseInt(row / 5))+1; 
+		 getComments(idx);
+		 history.replaceState({}, null, location.pathname);//파라미터 제거 
+		}else{
+			$(window).scrollTop(0);
+			getComments(idx);
+		}
+		
+		
+		
+		
+		function getCommentPage() {
+			let commentNo = Number(commentNoStr);
+			let page = 0;
+			$.ajax({
+				url: "/ajax/post/${posting.no}/comment/"+commentNo, 
+				dataType : "json",
+				 async: false, 
+				type : "post",
+				error : function() {
+					alert("상태점검중");
+				},
+				success : function(data) {
+				
+					console.log(data.commentPage / 8);
+					//let row = data.commentPage;
+					//page = (row % 5 == 0)? row / 5 : (parseInt(row / 5))+1; 
+					page = data.commentPage;
+				
+					
+				}	
+			});
+			
+			return page;
+			
+			
+		}
+		
+		
+		
+		function scrollComment(row) {//댓글로 스크롤 
+			const $item = $(".comment");
+			
+			//console.log($item.eq(row-1));
+		 	let top=$item.eq(row-1).offset().top-137;
+			console.log(top);
+			$(window).scrollTop(top);
+		}
+
+	//	console.log(idx);
+		
+
+ 		
+		
+		
+	
+	 
+		
+		//console.log(content);
+		 const editor = new tui.Editor({
+		        el: document.querySelector('.box_view'),
+		        //height: '300px',
+		      	initialValue: content
+		      });
 		
 		navSection();
 		function navSection() {
@@ -280,15 +356,21 @@
 		}
 		
 		
-		
 	
 		
 		
-		beLike($postLikeBtn);
-		getComments(idx);
-		$commmentList.on("click",".btn_like", activeLike);//on
-		$commmentList.on("click",".btn_delete",deleteComment);
-		 if(countComments<6){
+		
+
+	
+		
+		
+		beLike($postLikeBtn);//라이크 상태 확인 
+		
+		$commmentList.on("click",".btn_like", activeLike);//라이크 하기 
+		$commmentList.on("click",".btn_delete",deleteComment);//라이크 취소하기 
+		
+		
+		if(countComments<6){//댓글 개수가 5개 이하일때 
 			 $commentMoreDiv.addClass("delete");
 		}else{
 			 $commentMoreDiv.removeClass("delete");
@@ -410,7 +492,15 @@
 					
 					$commmentList.find(".btn_like").each(function(){
 						beLike($(this));
+						if(row!=0){
+							scrollComment(row);
+							row = 0;
+						}
 						
+						if(idx>=last){
+							$commentMoreDiv.addClass("delete");
+						}
+						 
 					} );
 					
 				}
@@ -420,18 +510,16 @@
 		}//getComments() end
 		
 		
-	//댓글 더보기 눌렀을 때 
-	
+	//댓글 더보기 눌렀을 때
 		$commentMoreBtn.on("click",function(){
-			idx=(idx==1)?2:idx;
-			getComments(idx++);
-			console.log(idx+" "+last);
-			if(idx>last){
-				$commentMoreDiv.addClass("delete");
-			}
-			
-			
+			//console.log(idx+" "+last);
+			getComments(++idx);
+
 		});//on() end 
+		
+		
+		
+		
 	
 		$postLikeBtn.on('click', activeLike);
 		
@@ -505,7 +593,7 @@
 					alert("상태점검중")
 				},
 				success : function(json) {
-					console.log(json.result);
+					//console.log(json.result);
 					if (json.result) {// like 되어 있음 
 						$this.addClass("like");
 					} else {//like 없음 
