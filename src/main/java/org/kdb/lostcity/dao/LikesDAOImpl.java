@@ -9,6 +9,13 @@ import org.springframework.stereotype.Repository;
 public class LikesDAOImpl implements LikesDAO {
 	@Autowired
 	private SqlSession session;
+	
+	@Override
+	public int deleteALL(Like info) {
+		// TODO Auto-generated method stub
+		return session.delete("likes.deleteALL", info);
+	}
+	
 	@Override
 	public int delete(Like info) {
 		// TODO Auto-generated method stub

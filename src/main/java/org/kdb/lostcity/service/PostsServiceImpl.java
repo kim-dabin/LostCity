@@ -6,9 +6,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.kdb.lostcity.dao.CommentsDAO;
 import org.kdb.lostcity.dao.ExplorersDAO;
+import org.kdb.lostcity.dao.LikesDAO;
 import org.kdb.lostcity.dao.PostsDAO;
 import org.kdb.lostcity.util.EloRatingUtil;
 import org.kdb.lostcity.util.PaginateUtil;
+import org.kdb.lostcity.vo.Like;
 import org.kdb.lostcity.vo.PageVO;
 import org.kdb.lostcity.vo.Post;
 import org.kdb.lostcity.vo.StatisticVO;
@@ -24,7 +26,8 @@ public class PostsServiceImpl implements PostsService {
 	private CommentsDAO commentsDAO;
 	@Autowired 
 	private ExplorersDAO explorersDAO;
-
+	@Autowired
+	private LikesDAO likesDAO;
 	@Autowired
 	private PaginateUtil paginateUtil;
 	@Autowired
@@ -67,12 +70,42 @@ public class PostsServiceImpl implements PostsService {
 	@Override
 	@Transactional
 	public boolean delete(int no) {
+		Like likeInfo = new Like();
+		likeInfo.setContentType("P");
+		likeInfo.setContentNo(no);
+		
 		if(commentsDAO.selectAmount(no)>0) {
 			commentsDAO.deleteALL(no);
+		}
+		if(likesDAO.selectAmount(likeInfo)>0) {
+			likesDAO.deleteALL(likeInfo);
 		}
 		if(postsDAO.delete(no)>0) { return true;}
 		return false;
 	}
+	
+	@Override
+	@Transactional
+	public int delete(int no, int explorerNo) {
+		Like likeInfo = new Like();
+		likeInfo.setContentType("P");
+		likeInfo.setContentNo(no);
+		
+		if(commentsDAO.selectAmount(no)>0) {
+			commentsDAO.deleteALL(no);
+		}
+		
+		if(likesDAO.selectAmount(likeInfo)>0) {
+			likesDAO.deleteALL(likeInfo);
+		}
+		
+		if(postsDAO.delete(no)>0) {
+			return postsDAO.selectAmountByUser(explorerNo);
+		}
+		
+		return -1;
+	}
+	
 	
 	@Override
 	@Transactional

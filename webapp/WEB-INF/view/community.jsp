@@ -158,8 +158,8 @@
 					
 
 					<div class="user_info" title="<@=post.nickname @>님의 페이지로 이동">
-						<a href="/user/<@=post.explorerNo @>">
-							<img src="<@=post.profile @>" width="50" />
+						<a href="/explorer/<@=post.explorerNo @>">
+							<img src="/profile/<@=post.profile @>" width="50" />
 						<strong> <@=post.nickname @> </strong>
 						</a>
 						

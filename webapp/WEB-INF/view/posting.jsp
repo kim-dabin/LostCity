@@ -37,7 +37,7 @@
 							<a href="/explorer/${posting.explorerNo }" title="${posting.nickname } 페이지로 이동">
 								<div class="thumb_user tier_${tier}" data-tier="${tier}">
 								
-									<img class="profile" src="${posting.profile }" />
+									<img class="profile" src="/profile/${posting.profile }" />
 								</div> <!--//.thumb_user  -->
 							</a>
 								<div class="nickname_user">
@@ -181,7 +181,7 @@
 <@_.each(comments, function(comment) { @>
 <li class="comment comment<@=comment.no @>" >
 	<a class="info_user" href="/explorer/<@=comment.explorerNo @>" title="<@=comment.nickname @>의 페이지로 이동">
-		<img src="<@=comment.profile @>" width="80">
+		<img src="/profile/<@=comment.profile @>" width="80">
 		<strong><@=comment.nickname @></strong>
 	</a><!--.info_user -->
 	<span class="bar"></span>
@@ -220,7 +220,7 @@
 
 <li class="comment upload">
 	<a class="info_user" href="/explorer/<@=comment.explorerNo @>" title="<@=comment.nickname @>의 페이지로 이동">
-		<img src="<@=comment.profile @>" width="80">
+		<img src="/profile/<@=comment.profile @>" width="80">
 		<strong><@=comment.nickname @></strong>
 	</a><!--.info_user -->
 	<span class="bar"></span>

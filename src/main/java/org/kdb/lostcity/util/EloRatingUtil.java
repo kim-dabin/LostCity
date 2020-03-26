@@ -9,12 +9,19 @@ public class EloRatingUtil {
 	private double interval[]= {0.0, 2.6, 19.76, 54.31, 83.3, 96.05, 99.86999999999999, 99.92999999999999, 99.97999999999999, 99.99999999999999, 100.00999999999999}; //티어 구간 
 	
 	public double getProb(double score, double mean, double sd) {
-		NormalDistribution normal = new NormalDistribution(mean, sd);
-		NumberFormat nf = NumberFormat.getInstance();//지수 표현 제거
-		nf.setGroupingUsed(false);
+		double prob = 0.0;
+		try {
+			NormalDistribution normal = new NormalDistribution(mean, sd);
+			NumberFormat nf = NumberFormat.getInstance();//지수 표현 제거
+			nf.setGroupingUsed(false);
 
-		String probString = nf.format(normal.cumulativeProbability(score)*100);//확률(백분율) 계산 
-		double prob = Double.parseDouble(probString);
+			String probString = nf.format(normal.cumulativeProbability(score)*100);//확률(백분율) 계산 
+			prob = Double.parseDouble(probString);
+		} catch (Exception e) {
+			prob = 100.0;
+		}
+		
+		
 		return prob;
 	}
 	

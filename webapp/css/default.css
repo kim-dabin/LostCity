@@ -417,7 +417,19 @@ div.list_item_news .time_news{
 	text-decoration: none;
 
 }
-#profileList li.profile a span.open_door{
+
+#profileList li.profile form button{
+	height: 68px;
+	display: inline-block;
+	padding: 0;
+	border: none;
+	color: rgb(216, 171, 83);
+	font: 18px "Kakao";
+	font-weight: bold;
+	background: transparent;
+}
+
+#profileList li.profile span.open_door{
 	height: 58.5px;
 	width: 26.75px;
 	visibility: hidden;
@@ -435,7 +447,7 @@ div.list_item_news .time_news{
 
 }
 
-#profileList li.profile a span.close_door{
+#profileList li.profile span.close_door{
 	height: 49px;
 	width: 27px;
 	visibility: hidden;
@@ -462,12 +474,13 @@ div.list_item_news .time_news{
 
 }
 
-#profileList li.profile:hover a{
+#profileList li.profile:hover a , #profileList li.profile:hover form button{
 	color: #2D230D;
 	font-weight: bold;
+	cursor: pointer;
 }
 
-#profileList li.profile:hover a>span{
+#profileList li.profile:hover span{
 	visibility: visible;
 	opacity: 1;
 	transform: translateX(0);

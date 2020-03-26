@@ -54,21 +54,35 @@ public class ExplorersServiceImpl implements ExplorersService {
 		int cnt=1;
 		for(int i=0; i<scoreList.size();i++) {
 			int check = (int) Math.ceil(scoreList.get(i));
-			System.out.println(check);
+			//System.out.println("check "+check);
+			
+		
 			for(int j=0; j<=3000; j+=50) {
 				int idx = j/50;
-				if(j<=check&&j+50>check) {
-					
-					nums[idx]+=1;
-					percentage[idx] = 100.0-eru.getProb(j, stat.getAvg(), stat.getStd());
-					num.add(idx,nums[idx]);
-					prob.add(idx, percentage[idx]);
-					
-				}else {
-					num.add(idx,0);
-					prob.add(idx, 0.0);
+				try {
+					if(j<=check&&j+50>check) {
+						
+						nums[idx]+=1;
+						percentage[idx] = 100.0-eru.getProb(j, stat.getAvg(), stat.getStd());
+						
+						num.add(idx,nums[idx]);
+						prob.add(idx, percentage[idx]);
+						
+					}else {
+						System.out.println(stat.getAvg());
+						num.add(idx,0);
+						prob.add(idx, 0.0);
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+					//percentage[idx] = 100.0-eru.getProb(j, stat.getAvg(), 1.0);
+					//num.add(idx,nums[idx]);
+					//prob.add(idx, percentage[idx] );
 				}
+				
 			}
+			
+			
 			
 		}
 		

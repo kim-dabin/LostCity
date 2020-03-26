@@ -87,10 +87,18 @@ public class AjaxController {
 		return explorersService.getRanking();
 	}
 	
+	@RequestMapping(value="/explorer/{explorerNo}/post/{no}", method=RequestMethod.DELETE)	
+	public boolean deletePost(@PathVariable int explorerNo, @PathVariable int no ) {
+			
+		return postsService.delete(no);
+	}
+	
 	@RequestMapping(value="/comment/{no}", method=RequestMethod.GET)
 	public Comment getComment(@PathVariable int no) {
 		return commentsService.getComment(no);
 	}
+	
+	
 	
 	@RequestMapping(value="/post/{postNo}/comment/{no}", method=RequestMethod.DELETE)
 	public int deleteComment(@PathVariable int no, @PathVariable int postNo) {

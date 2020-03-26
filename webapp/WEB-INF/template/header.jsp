@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="header">
 <h1><a href="/waiting">The Lost City</a></h1>
+<c:if test="${param.type!='n' }">
 <div class="aux">
 	<div id="gnb" >
 		<h2 class="screen_out"> 주요 서비스 </h2>
@@ -12,16 +14,22 @@
 		</ul>
 	</div><!--//#gnb -->
 </div><!--//aux -->
+</c:if>
 <div id="loginBox">
 	<h2 class="screen_out">유저정보</h2>
-	<img src="${logUser.profile }"
+	<img src="/profile/${logUser.profile }"
 	class="profile_on"  width="60" height="60"
 	alt="유저 프로필"
 	title="${logUser.nickname }"/>
 	<div id="profilePopup" class="profile_on">
 		<ul id="profileList">
 			<li class="profile"><a href="/explorer/${logUser.no }"><span class="open_door" >문</span> 마이페이지</a></li><!--//.profile -->
-			<li class="profile"><a href="/log"><span class="close_door" >문</span> 로그아웃</a></li><!--//.profile -->
+			<li class="profile">
+			<form action="/session" method="post">
+			<input type="hidden" name="_method" value="DELETE"  />
+			<button type="submit" ><span class="close_door" >문</span> 로그아웃</button>
+			</form>
+			</li><!--//.profile -->
 		</ul><!--//profileList -->
 	</div><!--//#profilePopup -->
 </div><!--// loginBox  -->

@@ -53,6 +53,12 @@ public class ExplorerController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/session", method = RequestMethod.DELETE )
+	public String logout(HttpSession session ) {
+		session.removeAttribute("logUser");
+		return "redirect:/index"; 
+	}
+	
 	@RequestMapping(value="/session", method = RequestMethod.POST)
 	public String login(Explorer user, @RequestHeader String referer, HttpSession session, RedirectAttributes ra) {
 		

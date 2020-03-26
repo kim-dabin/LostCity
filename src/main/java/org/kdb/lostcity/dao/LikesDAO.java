@@ -9,5 +9,5 @@ public interface LikesDAO {
 	public int selectAmount(Like info);
 	public int delete(Like info);
 	public int insert(Like info);
-	
+	public int deleteALL(Like info);
 }

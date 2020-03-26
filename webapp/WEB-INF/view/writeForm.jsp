@@ -16,7 +16,7 @@
         <h1><a href="/waiting.jsp">The Lost City</a></h1>
         <div id="loginBox">
 	<h2 class="screen_out">유저정보</h2>
-	<img src="${logUser.profile }"
+	<img src="/profile/${logUser.profile }"
 	class="profile_on"  width="60" height="60"
 	alt="유저 프로필"
 	title="${logUser.nickname }"/>

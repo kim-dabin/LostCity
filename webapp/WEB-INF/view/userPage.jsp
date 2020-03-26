@@ -11,44 +11,18 @@
     <link rel="stylesheet" href="/css/user.css" />
  
     </head>
-  <div id="header">
-        <h1><a href="/waiting">The Lost City</a></h1>
-        <div id="loginBox">
-	<h2 class="screen_out">유저정보</h2>
-	<img src="${logUser.profile }"
-	class="profile_on"  width="60" height="60"
-	alt="유저 프로필"
-	title="${logUser.nickname }"/>
-	<div id="profilePopup" class="profile_on">
-		<ul id="profileList">
-			<li class="profile"><a href="/explorer/${logUser.no }"><span class="open_door" >문</span> 마이페이지</a></li><!--//.profile -->
-			<li class="profile"><a href="/log"><span class="close_door" >문</span> 로그아웃</a></li><!--//.profile -->
-		</ul><!--//profileList -->
-	</div><!--//#profilePopup -->
-</div><!--// loginBox  -->
-    <script>
-            const $profile = $("#loginBox img");
-            const $profileTarget = $("#profilePopup");
-
-            $profile.click(function () {
-                $profileTarget.toggle();
-        });// profileBox click end
-
-            $("html").click(function(e){
-                if(!$(e.target).hasClass("profile_on")){
-                    $profileTarget.hide();
-                }
-        });//
-    </script>
-
-</div><!-- //header -->
+<body>
+<c:import url="/WEB-INF/template/header.jsp">
+		<c:param name="type" value="n"></c:param>
+	</c:import>
+  
 <div id="content">
     <div class="aux">
         <div id="profileInfoWrap">
             <div class="box_user_info">
 
                 <div class="user_info">
-                 <img src="${explorer.profile }" />
+                 <img src="/profile/${explorer.profile }" />
                  <strong>${explorer.nickname }</strong>
                  <div title="정보 수정" class="btn_profile_setting">  
                  <i class="fas fa-cog"></i>
@@ -1270,7 +1244,7 @@
 <@ } else { @>
 
 
-<li class"post">작성글이 없습니다. </li>
+<li class="post"> 작성글이 없습니다. </li>
 
 <@ } @>
 </script>
@@ -1295,6 +1269,7 @@
     const $postList = $("#postingList ul");
     const $commentList = $("#commentList ul");
     const $commentsTotal =$(".total_comments");
+    const $postsTotal = $(".total_posts");
     let checkedTabValue = $("input[name=tab]:checked").val();//체크된 article
     
     
@@ -1322,7 +1297,13 @@ getCheckedTab(checkedTabValue);
 		if(check){
     	$.each(inp, function() {
 			//console.log();
-			deleteComment($(this).val());
+    		if(checkedTabValue=="posting"){
+    			deletePost($(this).val());
+    			}else if(checkedTabValue=="comments"){
+    			//	console.log(json);
+    				deleteComment($(this).val());
+    			}
+			
 			
 			
 		});
@@ -1347,7 +1328,7 @@ getCheckedTab(checkedTabValue);
 				},
 				success : function(comments) {
 					getArticles(checkedTabValue);
-					$commentsTotal.text(comments);
+					//$commentsTotal.text(comments);
 				}
 
 			});//ajax end
@@ -1356,6 +1337,23 @@ getCheckedTab(checkedTabValue);
 		
 	
 	}
+  
+  function deletePost(no) {
+		
+		$.ajax({
+			url: "/ajax/explorer/${explorer.no}/post/"+no, 
+			dataType : "json",
+			type : "delete",
+			error : function() {
+				alert("상태점검중");
+			},
+			success : function(posts) {
+				getArticles(checkedTabValue);
+				//$postsTotal.text(posts);
+			}
+
+		});//ajax end
+}
     
     
 
@@ -1382,9 +1380,12 @@ getCheckedTab(checkedTabValue);
     		success:function(json){
     			if(checkedTabValue=="posting"){
     			$postList.empty().append(postsTmp({"posts":json}));
+    			$postsTotal.text(json.length);
+    			//console.log(json.length);
     			}else if(checkedTabValue=="comments"){
     			//	console.log(json);
     			$commentList.empty().append(commentsTmp({"commentList":json}));
+    			$commentsTotal.text(json.length);
     			}
     		}//success
 			
