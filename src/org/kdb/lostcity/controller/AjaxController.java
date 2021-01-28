@@ -1,4 +1,4 @@
-package main.java.org.kdb.lostcity.controller;
+package org.kdb.lostcity.controller;
 
 import java.io.File;
 import java.util.List;
