@@ -3,6 +3,7 @@ package org.kdb.lostcity.dao;
 import java.util.List;
 
 import org.kdb.lostcity.vo.Explorer;
+import org.kdb.lostcity.vo.StatisticVO;
 
 
 public interface ExplorersDAO {
@@ -11,4 +12,6 @@ public interface ExplorersDAO {
 	public int selectId(String id);
 	public int selectNickname(String nickname);
 	public int insertUser(Explorer user);
+	public StatisticVO selectStatistics();
+	public Explorer selectUser(int no);
 }

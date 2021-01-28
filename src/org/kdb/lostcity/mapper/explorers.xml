@@ -3,18 +3,28 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="explorers">
-
+	
+	<select id="selectStatistics" resultType="StatisticVO">
+		select AVG(score) avg, STD(score) std
+		from explorers	
+	</select>
 	<insert id="insertUser" parameterType="Explorer"><!-- join -->
 		insert into explorers(email, password, nickname, profile)
 		values( #{email}, #{password}, #{nickname}, #{profile} )	
 	</insert>
-	
+	<select id="selectUser" resultType="Explorer" parameterType="int">
+		SELECT e.no, e.email, e.password, e.nickname, e.profile, e.check_email checkEmail, 
+		e.keep_login keepLogin, e.score, e.check_email_time checkEmailTime, 
+		(SELECT COUNT(*) FROM explorers WHERE score >= e.score) AS ranking
+		FROM explorers e
+		WHERE e.no = #{no}
+	</select>
 	<select id="selectList" resultType="Explorer">
-		SELECT email, password, nickname, profile, check_email checkEmail, keep_login keepLogin, score, check_email_time checkEmailTime
+		SELECT no, email, password, nickname, profile, check_email checkEmail, keep_login keepLogin, score, check_email_time checkEmailTime
 		FROM explorers
 	</select>
 	<select id="selectLogin" parameterType="Explorer" resultType="Explorer">
-		SELECT email, password, nickname, profile, check_email checkEmail, keep_login keepLogin, score, check_email_time checkEmailTime
+		SELECT no, email, password, nickname, profile, check_email checkEmail, keep_login keepLogin, score, check_email_time checkEmailTime
 		FROM explorers
 		WHERE email = #{email} AND password = #{password}
 	</select>  
@@ -33,15 +43,3 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-

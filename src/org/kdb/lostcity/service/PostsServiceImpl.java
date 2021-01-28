@@ -1,30 +1,143 @@
 package org.kdb.lostcity.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.kdb.lostcity.dao.CommentsDAO;
+import org.kdb.lostcity.dao.ExplorersDAO;
+import org.kdb.lostcity.dao.LikesDAO;
 import org.kdb.lostcity.dao.PostsDAO;
+import org.kdb.lostcity.util.EloRatingUtil;
 import org.kdb.lostcity.util.PaginateUtil;
+import org.kdb.lostcity.vo.Like;
 import org.kdb.lostcity.vo.PageVO;
 import org.kdb.lostcity.vo.Post;
+import org.kdb.lostcity.vo.StatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PostsServiceImpl implements PostsService {
 	@Autowired
 	private PostsDAO postsDAO;
 	@Autowired
+	private CommentsDAO commentsDAO;
+	@Autowired 
+	private ExplorersDAO explorersDAO;
+	@Autowired
+	private LikesDAO likesDAO;
+	@Autowired
 	private PaginateUtil paginateUtil;
+	@Autowired
+	private EloRatingUtil eru;
 	
-
 	
 	@Override
-	public Post getPost(int no) {
-		// TODO Auto-generated method stub
-		return postsDAO.selectOne(no);
+	public List<Post> getPostsByExplorer(int explorerNo) {
+		
+		return postsDAO.selectListByUser(explorerNo);
 	}
 	
+	@Override
+	@Transactional
+	public int getPosting(Post post) {
+		
+		if(postsDAO.insert(post)>0) {
+			
+		 return	postsDAO.selectLastInsertID();
+			
+		}
+		
+		return -1;
+	}
+
+	@Override
+	public Map<String, Post> getOrderPosts(Post info) {
+		Map<String, Post> map = new ConcurrentHashMap<String, Post>();
+		
+		int no = info.getNo();
+//		for(Post p : postsDAO.selectOrder(info)) {
+//			System.out.println(p.getNo());
+//				map.put(p.getNo()>no?"next":"prev", p);
+//			
+//			}
+//		
+		return map;
+	}
+	
+	@Override
+	@Transactional
+	public boolean delete(int no) {
+		Like likeInfo = new Like();
+		likeInfo.setContentType("P");
+		likeInfo.setContentNo(no);
+		
+		if(commentsDAO.selectAmount(no)>0) {
+			commentsDAO.deleteALL(no);
+		}
+		if(likesDAO.selectAmount(likeInfo)>0) {
+			likesDAO.deleteALL(likeInfo);
+		}
+		if(postsDAO.delete(no)>0) { return true;}
+		return false;
+	}
+	
+	@Override
+	@Transactional
+	public int delete(int no, int explorerNo) {
+		Like likeInfo = new Like();
+		likeInfo.setContentType("P");
+		likeInfo.setContentNo(no);
+		
+		if(commentsDAO.selectAmount(no)>0) {
+			commentsDAO.deleteALL(no);
+		}
+		
+		if(likesDAO.selectAmount(likeInfo)>0) {
+			likesDAO.deleteALL(likeInfo);
+		}
+		
+		if(postsDAO.delete(no)>0) {
+			return postsDAO.selectAmountByUser(explorerNo);
+		}
+		
+		return -1;
+	}
+	
+	
+	@Override
+	@Transactional
+	public  Map<String, Object> getPost(int no, String categoryType) {
+		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
+		Map<String, Object> orderMap = new ConcurrentHashMap<String, Object>();
+		Post orderPost = new Post(); // 이전글, 다음글 
+		Post postInfo = postsDAO.selectOne(no);
+		StatisticVO stat = explorersDAO.selectStatistics();
+	
+		int tier = eru.getTier(postInfo.getScore(), stat.getAvg(), stat.getStd() );
+//		System.out.println(tier);
+		map.put("tier", tier);
+		map.put("posting", postInfo);
+		map.put("type", categoryType);
+		orderMap.put("no", no);
+		
+		orderMap.put("categoryType", categoryType);
+//		orderPost.setNo(no);
+//		orderPost.setCategoryType(categoryType);
+		List<Post> orderPosts = postsDAO.selectOrder(orderMap);
+		
+		for(Post p : orderPosts ) {
+			System.out.println(p.getCategoryType());
+			System.out.println(p.getNo());
+				map.put(p.getNo()>no?"next":"prev", p);
+			
+			}
+	
+		
+		return map;
+	}
 	
 	
 	@Override

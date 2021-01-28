@@ -102,7 +102,7 @@ li.article .category {
 	color: #fff;
 }
 
-li.article .category.tip {
+/* li.article .category.tip {
 	background-color: #9575CD;
 }
 
@@ -116,7 +116,7 @@ li.article .category.prob {
 
 li.article .category.notice {
 	background-color: #424242;
-}
+} */
 
 li.article .box_title {
 	width: 600px;

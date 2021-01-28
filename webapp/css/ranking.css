@@ -1,0 +1,242 @@
+@charset "UTF-8";
+
+#content{
+            width:100%;   
+            min-height: 600px;      
+            position: relative;
+            background-color: #EEEEEE;
+
+        }
+
+        #leaderBoardGraphBox{
+            width: 100%;
+            height: 260px;
+            margin: auto;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        #leaderBoardGraphBox h2{
+            font-size: 16px;
+            padding: 14px 10px;
+            color: #fff;
+            background-color: #201909; /*header : #2d230d*/
+        }
+
+        #leaderBoardListBox{
+            width: 100%;
+            margin-top: 15px;
+            /*background-color: yellow;*/
+        }
+        #leaderBoardListBox .list_rating{
+            width: 100%;
+
+        }
+        #leaderBoardListBox td{
+            vertical-align: middle;
+        }
+        #leaderBoardListBox thead th{
+            font-size: 14px;
+            color: #fff;
+            padding: 10px;
+            background-color: #201909;
+            text-align: center;
+        }
+        #leaderBoardListBox tbody tr:nth-child(odd){
+            background-color: rgba(45, 35, 13, .2);
+        }
+         #leaderBoardListBox tbody tr{
+            background-color: rgba(45, 35, 13, .5);
+        }
+
+        #leaderBoardListBox tbody td{
+            line-height: 30px;
+            font-size: 13px;
+            color: #222;
+            text-align: center;
+            padding: 10px 8px;
+            cursor: pointer;
+
+
+        }
+        #leaderBoardListBox tbody td.rank{
+            max-width: 50px;
+        }
+
+        #leaderBoardListBox tbody td.player{
+            /*background-color: red;*/
+            text-align: left;
+            /*white-space: nowrap;*/
+            /*position: relative;*/
+
+        }
+        #leaderBoardListBox tbody td a {
+            color: #222;
+
+        }
+
+        #leaderBoardListBox tbody td.player img{
+          height: 34px;
+          width: 34px;
+          border-radius: 17px; 
+          margin-right: 5px;
+          /*border: 1px solid #424242;*/
+          vertical-align: middle;
+         /* position: absolute;
+         top: 15px;*/
+
+     }
+
+     
+     #leaderBoardListBox tbody td.rating{
+        /*width: 110px;*/
+        /*background-color: red;*/
+        text-align: left;
+
+    }
+
+    
+    tbody td.rating .tier {
+        display: inline-block;
+        width: 34px;
+        height: 34px;
+        vertical-align: middle;
+        border-radius: 17px;
+        background-image: url(../img/tier.png);
+        background-size: 319px 38px;
+        background-repeat: no-repeat;
+        background-color: #222;
+        margin-right: 5px;
+    }
+    
+   tbody td.rating .tier.tier_1 {
+        background-position: 1.5px 0px;
+    }
+
+   tbody td.rating .tier.tier_2 {
+        background-position: -34.5px 0px;
+    }
+
+   tbody td.rating .tier.tier_3 {
+        background-position: -69px 0px;
+    }
+
+   tbody td.rating .tier.tier_4 {
+        background-position: -103px 0px;
+    }
+
+   tbody td.rating .tier.tier_5{
+        background-position: -136px 1px;
+    }
+
+    tbody td.rating .tier.tier_6 {
+        background-position: -170.5px 0px;
+    }
+
+   tbody td.rating .tier.tier_7{
+        background-position: -204px 1px;
+    }
+
+    tbody td.rating .tier.tier_8 {
+        background-position: -242.1px -1px;
+    }
+
+    tbody td.rating .tier.tier_9 {
+        background-position: -282.8px -2px;
+    }
+
+    #leaderBoardListBox tbody td.winratio{
+        /*width: 130px;*/
+        text-align: center;
+        line-height: 1.2;
+        /*background-color: blue;*/
+    }
+
+    #leaderBoardListBox .winratio .winratio_graph{
+        display: inline-block;
+        width: 100px;
+        height: 10px;
+        background-color: #eaeaea;
+        /*position: relative;*/
+        border-radius: 4px;
+        vertical-align: middle;
+
+    }
+    #leaderBoardListBox .winratio .winratio_graph_fill{
+        height: 100%;
+        background-color: #2196F3;
+        border-top-right-radius: 0;
+        border-bottom-right-radius:0;
+        border-radius: 4px;
+        float: left;
+    }
+
+
+
+   #leaderBoardListBox tbody td.mostcity{
+    float: left;
+}
+
+
+#leaderBoardListBox tbody div.city::before{
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #222;
+    margin-right: 5px;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+}
+
+#leaderBoardListBox .city.red::before{
+    background-image: url(../img/symbol_red.png);
+    background-size: 28.2px 30px;
+    /*background-size: 33px 35px;*/
+    background-position: 5.9px 5px;
+    /*background-position: 4px 2.5px;*/
+
+}
+#leaderBoardListBox .city.red{
+    color: #C62828;
+ }
+
+#leaderBoardListBox .city.blue::before{
+    background-image: url(../img/symbol_blue.png);
+    /*background-size: 26px 35px;*/
+    /*background-position: 6px 2.5px;*/
+    background-size: 23px 30px;
+    background-position: 8.5px 5px;
+}
+#leaderBoardListBox .city.blue{
+    color: #283593;
+}
+#leaderBoardListBox .city.green::before{
+    background-image: url(../img/symbol_green.png);
+    background-size: 30px 23px; 
+    background-position: 5px 8.5px;
+    /*background-size: 35px 27px;*/
+}
+#leaderBoardListBox .city.green{
+    color: #558B2F;
+}
+#leaderBoardListBox .city.white::before{
+    background-image: url(../img/symbol_white.png);
+    background-size: 30px 28px;
+    background-position: 5px 6px;
+    /*background-size: 35px 33px;*/
+}
+
+#leaderBoardListBox .city.white{
+    color: #EEEEEE;
+}
+#leaderBoardListBox .city.yellow::before{
+    background-image: url(../img/symbol_yellow.png);
+    background-size: 30px 27px;
+    background-position: 5px 6.5px;
+    /*background-size: 35px 32px;*/
+}
+#leaderBoardListBox .city.yellow{
+    color: #F9A825;
+}

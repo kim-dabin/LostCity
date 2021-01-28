@@ -2,18 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>로스트 시티 대기실</title>
-     <c:import url="/WEB-INF/template/link.jsp"/>	
-    <link rel="stylesheet" href="/css/waiting.css">
-    
+<meta charset="UTF-8">
+<title>로스트 시티 대기실</title>
+<c:import url="/WEB-INF/template/link.jsp"/>
+<link rel="stylesheet" href="/css/waiting.css" />
 </head>
 <body>
-
 <c:import url="/WEB-INF/template/header.jsp">
-<c:param name="type" value="w"></c:param>
+	<c:param name="type" value="w"/>
 </c:import>	
 <div id="content">
     <div class="aux">
@@ -22,7 +20,6 @@
             <div class="wrap_card" >
                 <h3 class="screen_out">게임방 리스트</h3>
                 <ul>
-
                     
                     <li class="card add_room">
                         <button title="방만들기" type="button" class="btn_add_room">
@@ -32,8 +29,6 @@
                 </ul>
             </div><!--//.wrap_card -->
         </div><!--//#gameRoomSection -->
-        
-        
         <div id="sideBar">
             <div id="ccuBox">
                 <h2 class="tit_ccu_num">
@@ -44,7 +39,7 @@
                             <span class="screen_out">유저 정보_</span>
                             <a href="user.html" title="짱구 페이지로 이동">
                                 <div class="user_thumb tier_9">
-                                    <img class="profile" src="/profile/profile2.png" />
+                                    <img class="profile" src="profile/profile2.png" />
                                 </div><!--//.user_thumb -->
                                 <div class="user_nickname">
                                     <strong>짱구</strong>
@@ -61,7 +56,7 @@
                     <ul>
                         <li>
                             <div class="card_user">
-                                <img src="/profile/profile.png" title="시바">
+                                <img src="profile/profile.png" title="시바">
                                 <strong>시바시바시</strong>
                             </div>
                             <div class="box_chat">
@@ -70,7 +65,7 @@
                         </li>
                         <li>
                             <div class="card_user">
-                                <img src="/profile/profile.png" title="시바">
+                                <img src="profile/profile.png" title="시바">
                                 <strong>시바시바시</strong>
                             </div>
                             <div class="box_chat">
@@ -79,7 +74,7 @@
                         </li>
                         <li class="mine">
                             <div class="card_user">
-                                <img src="/profile/profile2.png" title="짱구">
+                                <img src="profile/profile2.png" title="짱구">
                                 <strong>짱구짱구</strong>
                             </div>
                             <div class="box_chat">
@@ -88,7 +83,7 @@
                         </li>
                         <li>
                             <div class="card_user">
-                                <img src="/profile/profile.png" title="시바">
+                                <img src="profile/profile.png" title="시바">
                                 <strong>시바시바시</strong>
                             </div>
                             <div class="box_chat">
@@ -97,7 +92,7 @@
                         </li>
                         <li class="mine">
                             <div class="card_user">
-                                <img src="/profile/profile2.png" title="짱구">
+                                <img src="profile/profile2.png" title="짱구">
                                 <strong>짱구짱구</strong>
                             </div>
                             <div class="box_chat">
@@ -120,8 +115,9 @@
             </div><!--//#gameBottomSection -->
         </div><!--//aux -->
     </div><!--//content-->
-   <c:import url="/WEB-INF/template/footer.jsp"/>
+<c:import url="/WEB-INF/template/footer.jsp"/>
 
+<script src="js/fix-footer.js"></script>
 <div id="addRoomWrap" class="popup_bg">
   <div id="addRoomInner">
     <div class="box_tit">

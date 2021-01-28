@@ -12,6 +12,7 @@ public class Like implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public int getNo() {
 		return no;
 	}

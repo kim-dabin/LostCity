@@ -4,19 +4,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="likes">
 
-	
-	
-
+	<select id="selectBeing" resultType="Like" parameterType="Like">
+		select no, explorer_no explorerNo, content_no contentNo, content_type contentType, regdate
+		from likes
+		where content_type=#{contentType} and explorer_no=#{explorerNo} and content_no = #{contentNo}
+	</select>
+	<select id="selectAmount" resultType="int" parameterType="Like">
+		select COUNT(no) 
+		FROM likes 
+		WHERE content_type=#{contentType} and content_no = #{contentNo}
+	</select>
+	<delete id="deleteALL" parameterType="Like"> 
+		delete from likes where content_type=#{contentType} and content_no = #{contentNo}
+	</delete>
+	<delete id="delete" parameterType="Like"> 
+		delete from likes where content_type=#{contentType} and explorer_no=#{explorerNo} and content_no = #{contentNo}
+	</delete>
+	<insert id="insert" parameterType="Like">
+		insert into likes(explorer_no, content_no, content_type)
+		values(#{explorerNo}, #{contentNo}, #{contentType})
+	</insert>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
