@@ -1,0 +1,817 @@
+@charset "UTF-8";
+
+#content {
+	width: 100%;
+	position: relative;
+}
+
+#content #gameRoomSection {
+	width: 900px;
+	height: 350px;
+	position: relative;
+}
+
+#content div.wrap_card {
+	height: 350px;
+	width: 900px;
+	overflow: hidden;
+	overflow-y: auto;
+	position: absolute;
+}
+
+.wrap_card ul {
+	width: 895px;
+	min-height: 330px;
+	padding-left: 5px;
+	padding-top: 0px;
+}
+
+.room {
+	width: 210px;
+	height: 100px;
+	margin-bottom: 10px;
+	margin-right: 12.5px;
+	float: left;
+	position: relative;
+}
+
+button.btn_add_room {
+	display: inline-block;
+	width: 210px;
+	height: 100px;
+	/*background-color: red;*/
+	padding: 0;
+	border: 0;
+	border-radius: 8px;
+	outline: 0;
+	cursor: pointer;
+	font-family: "Kakao", "Noto Sans KR", "나눔고딕", NanumGothic, "맑은고딕",
+		"Malgun Gothic", "돋움", Dotum, "Helvetica Neue", Helvetica,
+		AppleSDGothicNeo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		NotoColorEmoji, "Segoe UI Symbol", "Android Emoji", EmojiSymbols;
+	font-size: 22px;
+	font-weight: 900;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0
+		rgba(0, 0, 0, 0.12);
+	line-height: 100px;
+	color: #2D220E;
+}
+
+.btn_add_room .fa-plus {
+	font-size: 30px;
+	vertical-align: middle;
+}
+
+.btn_add_room:hover {
+	background-color: #2D220E;
+	color: #fff;
+}
+
+.room a {
+	display: block;
+	width: 210px;
+	height: 100px;
+	text-decoration: none;
+	/*border: 1px solid #E0E0E0;*/
+	background-size: 245px;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 8px;
+	transition: .4s ease;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0
+		rgba(0, 0, 0, 0.12);
+}
+
+.room a.red {
+	background-image: url(../card/r1.png);
+}
+
+.room a.blue {
+	background-image: url(../card/b3.png);
+}
+
+.room a.white {
+	background-image: url(../card/w7.png);
+}
+
+.room a.green {
+	background-image: url(../card/g10.png);
+}
+
+.room a.yellow {
+	background-image: url(../card/y9.png);
+}
+
+.room a:hover {
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.room a:hover:before {
+	background-color: rgba(0, 0, 0, .8);
+}
+
+.room a::before {
+	content: "";
+	width: 210px;
+	height: 100px;
+	position: absolute;
+	background-color: rgba(0, 0, 0, .2);
+	border-radius: 8px;
+}
+
+.room .card_user {
+	width: 75px;
+	height: 90px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/*background: red;*/
+	text-align: center;
+}
+
+.card_user img {
+	display: block;
+	border-radius: 25px;
+	box-shadow: 0 2px 5px 0 rgba(32, 25, 9, 0.16), 0 2px 10px 0
+		rgba(32, 25, 9, 0.12);
+	position: relative;
+	z-index: 2;
+	margin: 20px auto 0 auto;
+	border: 1px solid #424242;
+}
+
+.card_user::after {
+	content: "";
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background-image: url(../img/tier.png);
+	background-size: 378px 45px;
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 15px;
+	top: 25px;
+	background-color: #fff;
+	/*background-color: rgb(15,18,20);*/
+	opacity: 0;
+	transition: .2s ease;
+	transform: translateX(0px);
+	z-index: 1;
+}
+
+.room a:hover .card_user::after {
+	opacity: 1;
+	transform: translateX(44px);
+}
+.card_user:hover ::after {
+	opacity: 1;
+	transform: translateX(42px);
+}
+
+.card_user.tier_1::after {
+	background-position: 1.5px 0px;
+}
+
+.card_user.tier_2::after {
+	background-position: -41px 0px;
+}
+
+.card_user.tier_3::after {
+	background-position: -82px 0px;
+}
+
+.card_user.tier_4::after {
+	background-position: -122.8px 0px;
+}
+
+.card_user.tier_5::after {
+	background-position: -161.5px 1px;
+}
+
+.card_user.tier_6::after {
+	background-position: -202px 0px;
+}
+
+.card_user.tier_7::after {
+	background-position: -242px 1px;
+}
+
+.card_user.tier_8::after {
+	background-position: -287.3px -1px;
+}
+
+.card_user.tier_9::after {
+	background-position: -335.3px -2.5px;
+}
+
+.room.key::after {
+	content: "";
+	display: block;
+	height: 28px;
+	width: 27.37px;
+	background-image: url(../img/key.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.card_user strong {
+	width: 75px;
+	height: 20px;
+	font-size: 13px;
+	display: block;
+	text-align: center;
+	color: #EEEEEE;
+	line-height: 17px;
+	text-shadow: 1px 1px 1px #424242;
+}
+
+.room h4 {
+	display: block;
+	width: 135px;
+	height: 30px;
+	font-size: 16px;
+	line-height: 30px;
+	text-align: left;
+	/*background-color: rgba(32, 25, 9, .8);*/
+	position: absolute;
+	top: 35px;
+	left: 70px;
+	color: #fff;
+	text-shadow: 1px 1px 1px #424242;
+	font-weight: 900;
+	overflow: hidden;
+}
+
+#sideBar {
+	width: 200px;
+	height: 700px;
+	/*background: #ececec;*/
+	position: absolute;
+	top: 0;
+	right: 0;
+	box-shadow: 0 2px 5px 0 rgba(32, 25, 9, 0.16), 0 2px 10px 0
+		rgba(32, 25, 9, 0.12);
+}
+
+#ccuBox {
+	width: 200px;
+	height: 600px;
+	overflow: hidden;
+}
+
+#ccuBox .tit_ccu_num {
+	width: 180px;
+	height: 40px;
+	text-align: right;
+	line-height: 40px;
+	overflow: hidden;
+	color: rgba(45, 35, 13, .8);
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.tit_ccu_num .ccu_num {
+	cursor: default;
+	font-weight: 900;
+	font-size: 25px;
+}
+
+#ccuBox #ccuList {
+	width: 180px;
+	height: 640px;
+	padding: 10px;
+	overflow-y: auto;
+	position: absolute;
+	top: 40px;
+}
+
+#ccuBox .user_info {
+	width: 168px;
+	height: 48px;
+	/*background: yellow;*/
+	margin-bottom: 10px;
+	/*border-radius: 10px;*/
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #ececec;
+	transition: .3s ease;
+	border-radius: 100px 0 0 100px;
+	
+}
+
+#ccuBox .user_info:hover {
+	background-color: rgba(45, 35, 13, .9);
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	border-color: rgba(45, 35, 13, .9);
+}
+
+#ccuBox .user_info:hover strong {
+	color: #fff;
+}
+
+#ccuBox a {
+	text-decoration: none;
+}
+
+#ccuBox strong {
+	font-size: 15px;
+	display: block;
+	/*background: red;*/
+	text-align: center;
+	color: #9E7B2E;
+	position: absolute;
+	top: 17.5px;
+	left: 80px;
+	font-weight: 700;
+}
+
+#ccuBox img.profile {
+	width: 34px;
+	height: 34px;
+	border-radius: 18px;
+	position: absolute;
+	top: 7px;
+	left: 10px;
+	z-index: 1;
+	border: 1px solid #424242;
+}
+
+.user_thumb {
+	width: 75px;
+	height: 50px;
+	/*background-color: blue;*/
+	position: relative;
+}
+
+.user_thumb::after {
+	content: "";
+	width: 34px;
+	height: 34px;
+	border-radius: 18px;
+	background-image: url(../img/tier.png);
+	background-size: 319px 38px;
+	background-repeat: no-repeat;
+	position: absolute;
+	right: 0;
+	top: 7px;
+	border: 1px solid #424242;
+}
+
+.user_thumb.tier_1::after {
+	background-position: 1px 0px;
+}
+
+.user_thumb.tier_2::after {
+	background-position: -35px 0px;
+}
+
+.user_thumb.tier_3::after {
+	background-position: -69px 0px;
+}
+
+.user_thumb.tier_4::after {
+	background-position: -103px 0px;
+}
+
+.user_thumb.tier_5::after {
+	background-position: -136px 1px;
+}
+
+.user_thumb.tier_6::after {
+	background-position: -170.5px 0px;
+}
+
+.user_thumb.tier_7::after {
+	background-position: -204px 1px;
+}
+
+.user_thumb.tier_8::after {
+	background-position: -242.1px -1px;
+}
+
+.user_thumb.tier_9::after {
+	background-position: -282.8px -2px;
+}
+
+#addRoomInner {
+	width: 560px;
+	min-height: 340px;
+	max-height: 520px;
+	
+	background-color: #fff;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	margin: -260px -280px;
+	border-radius: 2px;
+}
+
+#addRoomInner .box_tit {
+	height: 58px;
+	width: 540px;
+	/*background: blue;*/
+	line-height: 58px;
+	margin: auto;
+	text-align: center;
+	position: relative;
+	border-bottom: 2px solid #E0E0E0;
+}
+
+.box_tit .btn_close {
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	border: 0;
+	/*background-color: red;*/
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 20px;
+	outline: none;
+	cursor: pointer;
+}
+
+.box_tit .btn_close:hover {
+	background-color:#795548;
+	color:#fff;
+}
+
+#addRoomInner h2 {
+	width: 200px;
+	height: 60px;
+	margin: auto;
+	line-height: 60px;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+#addRoomFormBox {
+	width: 500px;
+	/*height: 450px;*/
+	/*background: green;*/
+	margin: auto;
+}
+
+#addRoomForm .row {
+	margin-top: 20px;
+}
+
+#addRoomForm label, #addRoomForm h2 {
+	display: block;
+	font-size: 15px;
+	color: #666;
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 10px;
+	font-weight: 900;
+	text-align: left;
+}
+#addRoomForm input:focus, #pwdForm input:focus {
+	outline: 2px solid #2D230D;
+}
+#addRoomForm input {
+	border: none;
+	width: 456px;
+	height: 20px;
+	font-size: 18px;
+	font-family: 'Kakao', sans-serif;
+	font-weight: 500;
+	padding: 15px 22px;
+	color: #606060;
+	transition: .2s ease;
+	z-index: 1;
+	outline: 1px solid #dadada;
+}
+
+#addRoomForm .box_pwd.on{
+	display: block;
+}
+#addRoomForm .box_pwd{
+	display: none;
+}
+
+
+#statusList {
+	width: 316px;
+	height: 36px;
+	/*background: blue;*/
+	position: relative;
+}
+
+#statusList .status {
+	width: 148px;
+	height: 36px;
+	background: red;
+	float: left;
+	margin-right: 10px;
+}
+
+.status input {
+	display: none;
+	margin: 10px;
+}
+
+.status button {
+	border: 0;
+	padding: 0;
+	outline: 0;
+}
+
+#statusList input[type="radio"]+label {
+	display: inline-block;
+	padding: 8px 19px;
+	background-color: #ccc;
+	font-size: 15px;
+	width: 110px;
+	text-align: center;
+	cursor: pointer;
+	transition: .1s ease;
+}
+
+#statusList input[type="radio"]:checked+label {
+	background-image: none;
+	background-color: #795548;
+	color: #fff;
+}
+
+#addRoomForm .box_btn {
+	height: 38px;
+	width: 500px;
+	margin: 15px auto;
+}
+
+#addRoomForm .btn:hover {
+	background: #795548;
+	color: #fff;
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+#passwordBox {
+	height: 180px;
+	/*background-color: red;*/
+	display: block;
+	position: relative;
+}
+
+
+#gameChattingSection {
+	width: 895px;
+	height: 350px;
+	/*background: #100c05;*/
+	/*border: 4px dotted #100c05;*/
+	position: relative;
+	box-shadow: 0 2px 5px 0 rgba(32, 25, 9, 0.16), 0 2px 10px 0
+		rgba(32, 25, 9, 0.12);
+	background-color: rgb(75,56,57);
+	border-radius: 8px 8px 0 0;
+}
+
+
+#chatBox {
+	width: 820px;
+	height: 200px;
+}
+
+#chatList {
+	height:300px;
+	overflow-y:scroll;
+}
+
+#chatList li {
+	padding: 5px;
+	min-height: 40px;
+	overflow: hidden;
+	position: relative;
+	padding-bottom:10px;
+}
+
+#chatList .box_chat {
+	width: 820px;
+	min-height: 40px;
+	/* 포지셔닝 컨텍스트 지정 */
+	position: relative;
+	left: 70px;
+	top: 10px;
+}
+
+#chatList .mine .box_chat {
+	top: 10px;
+	text-align: right;
+	left:-5px;
+}
+#chatList .card_user {
+	width:50px;
+	height:40px;
+	top:5px;
+}
+#chatList .mine .card_user {
+	width:50px;
+	height:40px;
+	top:5px;
+	right:0;
+	left:inherit;
+}
+
+#chatList .card_user img{
+	margin:auto;
+	width:32px;
+	height:32px;
+}
+#chatList .card_user strong {
+	width:50px;
+	font-size:7px;
+	line-height:7px;
+	font-weight:normal;
+}
+
+#chatList .comments {
+	font-size: 13px;
+	line-height: 1.5Vem;
+	max-width: 790px;
+	min-height: 15px;
+	background: rgb(255,223,8);
+	border-radius: 0 12px 12px 12px;
+	padding: 6px 10px;
+	position: relative;
+	color: #424242;
+	white-space: pre-wrap;
+	/* 단어를 브레이크 */
+	word-wrap: break-word;
+	display: inline-block;
+	/*font-weight: 700;*/
+	/*text-shadow:1px 1px 1px #424242;*/
+}
+
+#chatList .mine .comments {
+	border-radius: 12px 0px 12px 12px;
+}
+
+#chatList .mine .comments::before {
+	right: -10px;
+	left: inherit;
+	border: none;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid rgb(255,223,8);
+}
+
+#chatList .comments::before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: -10px;
+	top: 0;
+	width: 0;
+	height: 0;
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid rgb(255,223,8);
+}
+
+#inputChatBox {
+	width:895px;
+	height:50px;
+	position: relative;
+}
+
+#msg {
+	font-size:16px;
+	padding:5px 10px;
+	font-family: 'Kakao', sans-serif;
+	width:793px;
+	height:28px;
+	position: absolute;
+	left:5px;
+	top:5px;
+}
+#inputBtn {
+	position: absolute;
+	right:5px;
+	top:5px;
+	height:26px;
+}
+
+
+     #admissionPopup{
+            width: 500px;
+            height: 200px;
+            background-color: #fff;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            margin: -125px -250px;
+            border-radius: 2px;
+
+        }
+
+
+        #admissionPopup .box_tit{
+            height: 58px;
+            width: 480px;
+            /*background: blue;*/
+            line-height: 58px;
+            text-align: center;
+            position: relative;
+            margin: auto;
+            border-bottom: 2px solid #E0E0E0;
+        }
+
+        .box_tit h2{
+            width: 200px;
+            height: 58px;
+            margin: auto;
+            line-height: 60px;
+            font-size: 24px;
+            font-weight: bold;
+            /*background-color: red;*/
+        }
+        
+
+
+        #pwdFormBox{
+            width: 480px;
+            height: 120px;
+            margin: auto;
+            /*background-color: red;*/
+            position: relative;
+        }
+
+        #pwdForm .row{
+            /*background-color: red;*/
+            margin-top: 10px;
+
+        }
+
+        #pwdForm input {
+           font-family: 'Kakao', sans-serif;
+           font-size: 18px;
+           width:300px;
+           padding:8px;
+           border:none;
+           outline: 1px solid #dadada;
+           vertical-align: middle;
+           transition: .2s ease;
+           z-index: 1;
+           margin-left: 10px;
+
+       }
+
+
+
+   
+    #pwdForm label {
+        display: inline-block;
+        color: #666;
+        height: 50px;
+        width: 50px;
+        text-align: left;
+        text-indent: -9999px;
+        overflow: hidden;
+        background-image: url(../img/key01.png);
+        background-size: 49px 50px;
+
+        background-repeat: no-repeat;
+        /*background-color: #222;*/
+        vertical-align: middle;
+
+        /*background-color: blue;*/
+    }
+   
+
+    #admissionPopup .btn{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
