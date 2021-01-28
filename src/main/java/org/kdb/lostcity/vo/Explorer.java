@@ -3,8 +3,10 @@ package org.kdb.lostcity.vo;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import org.kdb.lostcity.util.EloRatingUtil;
+
 public class Explorer implements Serializable {
-	private int no;//user no
+	private int no, ranking;//user no
 	private String email, password, nickname, profile, checkEmail, keepLogin;
 	private double score;
 	private Timestamp regdate, checkEmailTime;
@@ -12,6 +14,17 @@ public class Explorer implements Serializable {
 	public Explorer() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
+	
+	public int getRanking() {
+		return ranking;
+	}
+
 	
 	public void setCheckEmailTime(Timestamp checkEmailTime) {
 		this.checkEmailTime = checkEmailTime;

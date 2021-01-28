@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.kdb.lostcity.vo.Explorer;
+import org.kdb.lostcity.vo.StatisticVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,11 @@ public class ExplorersDAOImpl implements ExplorersDAO {
 	@Autowired
 	private SqlSession session;
 	
-
+	@Override
+	public StatisticVO selectStatistics() {
+		// TODO Auto-generated method stub
+		return session.selectOne("explorers.selectStatistics");
+	}
 	@Override
 	public int insertUser(Explorer user) {
 		// TODO Auto-generated method stub
@@ -23,6 +28,12 @@ public class ExplorersDAOImpl implements ExplorersDAO {
 	public Explorer selectLogin(Explorer user) {
 		// TODO Auto-generated method stub
 		return session.selectOne("explorers.selectLogin", user);
+	}
+	
+	@Override
+	public Explorer selectUser(int no) {
+		// TODO Auto-generated method stub
+		return session.selectOne("explorers.selectUser", no);
 	}
 	
 	@Override

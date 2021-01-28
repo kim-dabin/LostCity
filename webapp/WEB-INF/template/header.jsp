@@ -6,7 +6,7 @@
 	<div id="gnb" >
 		<h2 class="screen_out"> 주요 서비스 </h2>
 		<ul>
-			<li class="nav"> <a class="waitingRoom" href="waiting.html">대기실</a> </li>
+			<li class="nav"> <a class="waitingRoom" href="/waiting">대기실</a> </li>
 			<li class="nav"> <a  class="ranking" href="ranking.html" >랭 킹</a> </li>
 			<li class="nav ${param.type=='c'?'on':''}"> <a class="community" href="/community" >커뮤니티</a> </li>
 		</ul>
