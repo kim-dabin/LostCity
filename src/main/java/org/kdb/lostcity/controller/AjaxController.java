@@ -1,10 +1,8 @@
 package org.kdb.lostcity.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -17,16 +15,12 @@ import org.kdb.lostcity.service.RankingService;
 import org.kdb.lostcity.util.FileRenameUtil;
 import org.kdb.lostcity.util.ResizeImageUtil;
 import org.kdb.lostcity.vo.Comment;
-import org.kdb.lostcity.vo.Explorer;
 import org.kdb.lostcity.vo.Like;
-import org.kdb.lostcity.vo.PageVO;
 import org.kdb.lostcity.vo.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -122,7 +116,7 @@ public class AjaxController {
 	@RequestMapping(value="/user/upload",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
 	public String uploadImage(HttpServletRequest request, MultipartFile uploadImg, String type) {
 		//절대 경로 구하기 위한 
-		 ServletContext sc = request.getServletContext();
+		 ServletContext sc = request.getSession().getServletContext();
 		 
 		 String uploadPath = sc.getRealPath("upload");
 			String profilePath = sc.getRealPath("profile");
