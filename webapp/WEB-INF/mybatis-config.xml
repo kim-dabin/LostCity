@@ -16,6 +16,7 @@
 		<typeAlias type="org.kdb.lostcity.vo.View" alias="View"/>
 		<typeAlias type="org.kdb.lostcity.vo.PageVO" alias="PageVO"/>
 		<typeAlias type="org.kdb.lostcity.vo.Report" alias="Report"/>
+		<typeAlias type="org.kdb.lostcity.vo.StatisticVO" alias="StatisticVO"/>  
 	</typeAliases>
 
 	<mappers>

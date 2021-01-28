@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>로스트 시티 대기실</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/kakao.font.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/default.css" />
+    <link rel="icon" type="image/x-icon" href="img/logo.png"/>
+    <script src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/waiting.css">
+    <link rel="icon" type="image/x-icon" href="img/symbol_yellow.png"/>
+
+    <style>
+
+
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <h1><a href="/waiting.jsp">The Lost City</a></h1>
+        <div class="aux"> 
+            <div id="gnb" >
+                <h2 class="screen_out"> 주요 서비스 </h2>
+                <ul>
+                    <li class="nav"> <a class="on" href="waiting.html">대기실</a> </li>
+                    <li class="nav"> <a  href="ranking.html" >랭 킹</a> </li>
+                    <li class="nav"> <a  href="community.html" >커뮤니티</a> </li>
+                </ul>
+            </div><!--//#gnb -->
+        </div><!--//aux -->
+        <div id="widget">
+            <div id="noticeBox">
+                <h2 class="screen_out">알림</h2>
+                <span class="ico_notice popup" title="새로운 소식이 4개가 있습니다">
+                    <i class="fas fa-concierge-bell popup"></i>
+                </span>
+                <div id="newsPopup" class="popup">
+                    <h3>
+                        새알림 <span>+4</span> 
+                    </h3>
+                    <div id="newsList">
+                     <ul>
+                        <li class="item_news off chat">
+                            <a class="link_item_news" href="community.html">
+                                <h4 class="screen_out">알림 내용</h4>
+                                <div class="list_item_news">
+                                    <ul>
+                                    <li class="content_news">시바시바시바시바시바 님이 귓속말을 걸었습니다</li>
+                                    <li class="time_news">1분전</li>
+                                </ul>  
+                                </div>
+                                
+                        
+                            </a>
+                        </li><!--//.item_news -->
+
+                         <li class="item_news community">
+                            <a class="link_item_news" href="community.html">
+                                <h4 class="screen_out">알림 내용</h4>
+                                <div class="list_item_news">
+                                    <ul>
+                                    <li class="content_news">작성글에 댓글(1)이 달렸습니다 작성글에 댓글(1)이 달렸습니다 작성글에 댓글(1)이 달렸습니다</li>
+                                    <li class="time_news">1분전</li>
+                                </ul>  
+                                </div>
+                                
+                        
+                            </a>
+                        </li><!--//.item_news -->
+
+                    </ul>
+                    </div><!--//#newsList -->
+                    
+                </div><!--//#newsPopup -->
+                
+            </div><!--//#noticeBox -->
+            <div id="loginBox">
+            <h2 class="screen_out">유저정보</h2>
+            <img class="popup" src="profile/profile.png"
+            class="profile_on"  width="60" height="60"
+            alt="테스터"
+            title="테스터"/>
+            <div id="profilePopup" class="popup">
+                <ul id="profileList">
+                    <li class="profile"><a href="/user.jsp?no=3"><span class="open_door" >문</span> 마이페이지</a></li><!--//.profile -->
+                    <li class="profile"><a href="/logout.do"><span class="close_door" >문</span> 로그아웃</a></li><!--//.profile -->
+                </ul><!--//profileList -->
+            </div><!--//#profilePopup -->
+        </div><!--// loginBox  -->
+
+        </div><!--#widget -->
+        
+        <script>
+            const $profile = $("#loginBox img");
+            const $profileTarget = $("#profilePopup");
+            const $newsIcon = $(".ico_notice");//새소식 아이콘
+            const $newsTarget = $("#newsPopup");//새소식 팝업창
+
+
+            $profile.click(function () {
+                if(!$newsTarget.hasClass("on")){
+                     $profileTarget.toggleClass("on");
+                }else{
+                    $newsTarget.removeClass("on");
+                     $profileTarget.addClass("on");
+                }
+        });// profileBox click end
+
+            $newsIcon.on("click",function(){
+                if(!$profileTarget.hasClass("on")){
+                    $newsTarget.toggleClass("on");
+                }else{
+                    $profileTarget.removeClass("on");
+                    $newsTarget.addClass("on");
+                }
+            });//on() end
+
+            $("html").click(function(e){
+                if(!$(e.target).hasClass("popup")){
+                    $profileTarget.removeClass("on");
+                    $newsTarget.removeClass("on");
+                }
+
+        });//
+    </script>
+
+
+</div><!-- //header -->
+<div id="content">
+    <div class="aux">
+        <div id="gameRoomSection" >
+            <h2 class="screen_out">게임방</h2>
+            <div class="wrap_card" >
+                <h3 class="screen_out">게임방 리스트</h3>
+                <ul>
+                    <li class="room key">
+                        <a class="red" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마바사아자</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room">
+                        <a class="green" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room key">
+                        <a class="blue" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                       <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                       <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                       <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                       <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room">
+                        <a class="yellow" href=" ">
+
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+
+                    <li class="room key">
+                        <a class="white" href=" ">
+                            <div class="card_user tier_1">
+                                <img src="profile/profile.png" title="시바" width="50" />
+                                <strong>시바시바시</strong>
+                            </div><!--//.card_user -->
+                            <h4>가나다라마</h4>
+                        </a>
+                    </li><!--//.card -->
+                    <li class="card add_room">
+                        <button title="방만들기" type="button" class="btn_add_room">
+                            <i class="fas fa-plus"></i><span> 게임방 만들기</span>
+                        </button>
+                    </li><!--//add_room -->
+                </ul>
+            </div><!--//.wrap_card -->
+        </div><!--//#gameRoomSection -->
+        <div id="sideBar">
+            <div id="ccuBox">
+                <h2 class="tit_ccu_num">
+                    <i class="fas fa-users"></i> 
+                    <span class="ccu_num" title="대기자 70명">70명</span></h2>
+                    <ul id="ccuList">
+                        <li class="user_info">
+                            <span class="screen_out">유저 정보_</span>
+                            <a href="user.html" title="짱구 페이지로 이동">
+                                <div class="user_thumb tier_9">
+                                    <img class="profile" src="profile/profile2.png" />
+                                </div><!--//.user_thumb -->
+                                <div class="user_nickname">
+                                    <strong>짱구</strong>
+                                </div><!--//.user_nickname -->
+                            </a>
+                        </li><!--//.user -->
+
+                    </ul><!--//#ccuList -->
+                </div><!--//ccuBox -->
+            </div>
+            <div id="gameChattingSection">
+                <div id="chatList">
+                    <h3 class="screen_out" >채팅목록</h3>
+                    <ul>
+                        <li>
+                            <div class="card_user">
+                                <img src="profile/profile.png" title="시바">
+                                <strong>시바시바시</strong>
+                            </div>
+                            <div class="box_chat">
+                                <div class="comments">안녕하세요?</div>
+                            </div><!--//box_reply-->
+                        </li>
+                        <li>
+                            <div class="card_user">
+                                <img src="profile/profile.png" title="시바">
+                                <strong>시바시바시</strong>
+                            </div>
+                            <div class="box_chat">
+                                <div class="comments">안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요?</div>
+                            </div><!--//box_reply-->
+                        </li>
+                        <li class="mine">
+                            <div class="card_user">
+                                <img src="profile/profile2.png" title="짱구">
+                                <strong>짱구짱구</strong>
+                            </div>
+                            <div class="box_chat">
+                                <div class="comments">녕요안하세요안녕하세요안녕하세요안녕하세요안녕하세요하세요안녕하세요안녕하세요?</div>
+                            </div><!--//box_reply-->
+                        </li>
+                        <li>
+                            <div class="card_user">
+                                <img src="profile/profile.png" title="시바">
+                                <strong>시바시바시</strong>
+                            </div>
+                            <div class="box_chat">
+                                <div class="comments">안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요하세요안녕하세요안녕하세요?</div>
+                            </div><!--//box_reply-->
+                        </li>
+                        <li class="mine">
+                            <div class="card_user">
+                                <img src="profile/profile2.png" title="짱구">
+                                <strong>짱구짱구</strong>
+                            </div>
+                            <div class="box_chat">
+                                <div class="comments">안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요하세요안녕하세요안녕하세요?</div>
+                            </div><!--//box_reply-->
+                        </li>
+                    </ul>
+                </div><!--//.chatBox -->
+                <div id="inputChatBox">
+                    <form id="msgForm" action=" " method="post">
+                        <fieldset>
+                            <legend class="screen_out">메세지 입력폼</legend>
+                            <label for="message" class="screen_out">메세지 입력</label>
+                            <input
+                            name="message" autocomplete="off" id="msg" type="text" placeholder="메세지를 입력해주세요"/>
+                            <button id="inputBtn" class="btn" type="submit">입력</button>
+                        </fieldset>
+                    </form>
+                </div><!--//#inputChatBox -->
+            </div><!--//#gameBottomSection -->
+        </div><!--//aux -->
+    </div><!--//content-->
+    <div id="footer">
+        <div id="policy">
+            <h4 class="screen_out">정책 및 약관</h4>
+            <ul>
+            <li><a href="">회사소개</a></li><!--
+	 --><li><a href="">광고</a></li><!--
+	 --><li><a href="">검색등록</a></li><!--
+	 --><li><a href="">제휴제안</a></li><!--
+	 --><li><a href="">이용약관</a></li><!--
+	 --><li><a href=""><strong>개인정보이용약관</strong></a></li><!--
+	 --><li><a href="">청소년보호정책</a></li><!--
+  --><li><a href="">고객센터</a></li>
+</ul>
+</div><!--//policy -->
+<address>&copy; 2019 <a href="">jbp.org</a></address>
+</div><!--// footer -->
+<script src="js/fix-footer.js"></script>
+<div id="addRoomWrap" class="popup_bg">
+  <div id="addRoomInner">
+    <div class="box_tit">
+        <h2><i class="fas fa-dungeon"></i> 게임방 만들기</h2>
+        <button class="btn_close" type="button">
+            <i class="fas fa-times"></i>
+        </button>
+    </div><!--//.box_tit -->
+    <div id="addRoomFormBox">
+        <form id="addRoomForm" action="" method="post">
+            <fieldset>
+                <legend class="screen_out">게임방 만들기 폼</legend>
+                <div class="row">
+                    <label for="title">방이름</label>
+                    <input type="text" id="title" title="10글자 이내로 입력하세요."
+                    autocomplete="off"
+                    name="title" placeholder="10글자 이내로 방이름을 입력하세요"/>
+                    <div class="msg title"></div> 
+                </div><!--//.row -->
+                <div class="row">
+                    <h2>방 공개 여부</h2>
+                    <ul id="statusList">
+                        <li class="status">
+                            <input  type="radio" id="open" value="o" class="radio"
+                            name="status" checked="checked" />
+                            <label for="open">공 개</label>
+                        </li><!--//.status -->
+                        <li class="status">
+                            <input type="radio" class="radio" id="secret" 
+                            value="s"
+                            name="status"/>
+                            <label for="secret">비공개</label>
+                        </li><!--//.status -->
+                    </ul><!--//#statusList -->
+                </div><!--//.row -->
+                <div class="row box_pwd">
+                    <label class="label" for="pwd">비밀번호</label>
+                    <input type="password" id="pwd" placeholder="4~8자로 입력" title="4~8자로 입력"
+                    name="pwd"/>
+                    <div class="msg pwd"></div>
+                </div><!--//.row -->
+                <div class="row box_btn">
+                    <button class="btn make" type="submit"><i class="fas fa-dungeon"></i> 방만들기</button>
+                    <button class="btn cancel" type="reset"><i class="fas fa-redo"></i> 리 셋</button>
+                </div><!--//.box_btn -->
+            </fieldset>
+        </form><!--//#addRoomForm -->
+    </div><!--//#addRoomFormBox -->
+</div><!--//addRoomInner -->
+</div><!--//#addRoomWrap -->
+
+
+<div id="admissionWrap" class="popup_bg">
+    <div id="admissionPopup">
+        <div class="box_tit">
+           <h2>비밀방 입장</h2>
+           <button class="btn_close" type="button">
+            <i class="fas fa-times"></i>
+        </button>
+    </div><!--//box_tit -->
+
+    <div id="pwdFormBox">
+        <form id="pwdForm" action=" " method="post">
+            <div class="row">
+             <label class="label" title="방 비밀번호" for="pwd">비밀번호</label>
+             <input type="password" placeholder="비밀번호를 입력하세요" id="pwd" title="비밀번호" name="pwd"/>
+             <div class="msg pwd"></div>
+         </div>
+
+         <button class="btn" type="submit"><i class="fas fa-sign-in-alt"></i> 방입장</button>
+     </form><!--//pwdForm -->
+ </div><!--//pwdFormBox -->
+
+</div><!--//admissionPopup -->
+</div><!--//admissionWrap-->
+<script>
+
+    const $addRoomWrap = $("#addRoomWrap");
+    const $roomAddBtn = $(".btn_add_room");
+    const $closeBtn = $(".btn_close");
+    const $msgForm = $("#msgForm");
+    const $addRoomInner = $("#addRoomInner");
+    const $admissionWrap = $("#admissionWrap");
+    const $secretRoom = $("li.room.key");
+    const $admissionPopup = $("#admissionPopup");
+
+    const $status = $(".status input");//비밀방 클릭 버튼
+    const $boxRoomPwd = $("#addRoomForm .box_pwd"); //비밀방 만들기 패스워드 입력창 
+    const $inpRoomPwd = $("#addRoomForm .box_pwd #pwd");
+    const $addRoomForm = $("#addRoomForm");
+
+    const $pwdForm = $("#pwdForm");
+   
+    function checkRadio(){
+         let $secretBtn =  $("input:radio[name='status']:radio:checked").val();
+        if($secretBtn=='s'){
+             $boxRoomPwd.addClass("on");
+        }else{
+             $boxRoomPwd.removeClass("on");
+        }
+
+    }
+
+    $status.on("click",function(){
+        checkRadio();
+    });
+
+    $addRoomInner.on("click",function(e) {
+        e.stopPropagation();
+    });
+
+    $addRoomWrap.on("click",function() {
+        resetAddRoomWrap();
+        $addRoomWrap.removeClass("open");
+    });
+
+    $msgForm.on("submit",function(e) {
+        e.preventDefault();
+    });
+
+    $closeBtn.on("click",function() {
+       resetAddRoomWrap();
+        $addRoomWrap.removeClass("open");
+
+
+
+    });
+
+    $roomAddBtn.on("click",function() {
+        $addRoomWrap.addClass("open");
+    });
+
+    
+    
+    function resetAddRoomWrap(){
+        $addRoomForm[0].reset();
+        if($boxRoomPwd.hasClass("on")){
+         $boxRoomPwd.removeClass("on");
+        }
+    }
+
+
+    $admissionPopup.on("click",function(e) {
+        e.stopPropagation();
+    });
+
+    $admissionWrap.on("click",function() {
+        $admissionWrap.removeClass("open");
+        $pwdForm[0].reset();
+    });
+
+    
+
+    $closeBtn.on("click",function() {
+        $admissionWrap.removeClass("open");
+        $pwdForm[0].reset();
+
+    });
+
+
+    $secretRoom.on("click",function() {
+        $admissionWrap.addClass("open");
+        return false;
+    });
+</script>
+
+
+</body>
+</html>

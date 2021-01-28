@@ -19,10 +19,6 @@
 
 <script src="/js/fix-footer.js"></script>
 <script>
-
-//한국시간으로 변경 
-moment.locale("ko"); 
-
 _.templateSettings = {interpolate: /\<\@\=(.+?)\@\>/gim,evaluate: /\<\@([\s\S]+?)\@\>/gim,escape: /\<\@\-(.+?)\@\>/gim};
-
+moment.locale("ko"); 
 </script>
